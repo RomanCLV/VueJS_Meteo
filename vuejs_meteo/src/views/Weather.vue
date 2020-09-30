@@ -15,10 +15,14 @@
 <script>
     import axios from 'axios';
     import WeatherCard from '../components/WeatherCard.vue';
+    import { API_KEY } from "@/API/OpenWeatherMap/API_KEY";
 
     export default {
         name: 'Weather',
         components: { WeatherCard },
+        props:{
+            city:String,
+        },
         data() {
             return {
                 forecast: null,
@@ -30,7 +34,7 @@
         asyncComputed: {
             weatherDataList: {
                 async get() {
-                    return await axios.get('http://api.openweathermap.org/data/2.5/forecast?q=cergy&appid=f2580a158c61ea6ae4b9faad15db864b&units=metric&lang=fr')
+                    return await axios.get('http://api.openweathermap.org/data/2.5/forecast?q=cergy&appid=' +API_KEY + '&units=metric&lang=fr')
                         .then((response) => response.data.list);
                     /* return axios.get('http://api.openweathermap.org/data/2.5/weather?q=cergy&appid=f2580a158c61ea6ae4b9faad15db864b&units=metric&lang=fr')
                       .then((response) => response.data); */
