@@ -1,5 +1,5 @@
 <template>
-    <div >
+    <div style="height: 100%;">
         <b-card
                 v-bind:title="weatherData.dt | formatDate(this.lang)"
                 tag="article"
@@ -42,7 +42,9 @@
 
                         <b-container class="bv-example-row">
                             <b-row>
-                                <b-col md="2"><img src='https://picsum.photos/200/200/?image=20' width="50" alt=""></b-col>
+                                <b-col md="2">
+                                    <DropIcon v-bind:humidity="weatherData.main.humidity"/>
+                                </b-col>
                                 <b-col align="left">
                                     {{weatherData.main.humidity}}%
 
@@ -61,9 +63,11 @@
 
 <script>
     import moment from 'moment'
+    import DropIcon from "./DropIcon";
 
     export default {
         name: 'WeatherCard',
+        components: {DropIcon},
         props: {
             weatherData: Object,
             weatherImg: String,
