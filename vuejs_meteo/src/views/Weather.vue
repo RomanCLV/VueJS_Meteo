@@ -3,12 +3,29 @@
         <div>
             <!--{{meteoData}}
             <WeatherCard v-bind:meteo=this.meteoData></WeatherCard>-->
-            <ul>
-                <li v-for="(weather, index) in this.weatherDataList" v-bind:key="index">
-                    <WeatherCard v-bind:weatherData=weather v-bind:weather-img="`http://openweathermap.org/img/w/${weather.weather[0].icon}.png`"></WeatherCard>
-                </li>
-            </ul>
+          <b-carousel
+              id="carousel-1"
+              v-model="slide"
+              :interval="4000"
+              controls
+              indicators
+              background="#ababab"
+              img-width="1024"
+              img-height="300"
+              style="text-shadow: 1px 1px 2px #333;"
+              @sliding-start="onSlideStart"
+              @sliding-end="onSlideEnd"
+          >
+            <b-carousel-slide v-for="(weather, index) in this.weatherDataList" v-bind:key="index" img-blank>
+
+              <WeatherCard v-bind:weatherData=weather v-bind:weather-img="`http://openweathermap.org/img/w/${weather.weather[0].icon}.png`"></WeatherCard>
+            </b-carousel-slide>
+
+          </b-carousel>
         </div>
+      <div>
+        <b-form-input id="range-2" v-model="value" type="range" min="0" v-bind:max="this.weatherDataList.length-1" step="1" @change="setSlide"></b-form-input>
+      </div>
     </div>
 </template>
 
@@ -25,11 +42,22 @@
         },
         data() {
             return {
-                forecast: null,
+              forecast: null,
+              value: 0,
+              slide: 0,
+              sliding: null,
             };
         },
         methods: {
-
+          onSlideStart() {
+            this.sliding = true
+          },
+          onSlideEnd() {
+            this.sliding = false
+          },
+          setSlide(){
+            this.slide = this.value
+          }
         },
         asyncComputed: {
             weatherDataList: {
@@ -51,4 +79,5 @@
     li{
         display: block;
     }
+
 </style>

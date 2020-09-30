@@ -9,13 +9,14 @@
         >
             <b-card-text>
                 <img v-bind:src="weatherImg" width="50px">
-                <div>température : {{weatherData.main.temp}}</div>
-                <div>ressentie : {{weatherData.main.feels_like}}</div>
+                <div><strong> nom a venir</strong></div>
+                <div>température : {{weatherData.main.temp}} °C</div>
+              <div>température moyenne : {{ (weatherData.main.temp_min + weatherData.main.temp_max)/2}} °C</div>
+
+              <div>ressentie : {{weatherData.main.feels_like}}</div>
                 <div>humidité : {{weatherData.main.humidity}}</div>
                 <div>temps : {{weatherData.weather[0].description}}</div>
             </b-card-text>
-
-            <b-button href="#" variant="primary">Go somewhere</b-button>
         </b-card>
     </div>
 </template>
