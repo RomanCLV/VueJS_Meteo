@@ -50,10 +50,12 @@
         },
         methods: {
           onSlideStart() {
-            this.sliding = true
+            this.sliding = true;
+            this.value = this.slide
           },
           onSlideEnd() {
             this.sliding = false
+            this.value = this.slide
           },
           setSlide(){
             this.slide = this.value
