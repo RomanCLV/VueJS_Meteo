@@ -4,14 +4,22 @@ Vue.use(Vuex);
 
 export const store = new Vuex.Store({
     state: {
-        name: "Roro"
+        namePage: "Météo +",
+        isMenuVisible: false
     },
     getters: {
-        name: state => state.name
+        namePage: state => state.namePage,
+        isMenuVisible: state => state.isMenuVisible
     },
     mutations: {
-        setName(state, value) {
-            state.name = value;
-        }
+        setNamePage(state, value) {
+            state.namePage = value;
+        },
+        setIsMenuVisible(state, value) {
+            state.isMenuVisible = value;
+        },
+        inverseIsMenuVisible(state) {
+            state.isMenuVisible = !state.isMenuVisible;
+        },
     }
 });
