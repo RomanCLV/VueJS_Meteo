@@ -42,23 +42,24 @@
         },
         data() {
             return {
-              forecast: null,
-              value: 0,
-              slide: 0,
-              sliding: null,
+                forecast: null,
+                value: 0,
+                slide: 0,
+                sliding: null,
+                creationDate:null,
             };
         },
         methods: {
-          onSlideStart() {
-            this.sliding = true;
-            this.value = this.slide
-          },
-          onSlideEnd() {
-            this.sliding = false
-            this.value = this.slide
-          },
-          setSlide(){
-            this.slide = this.value
+            onSlideStart() {
+                this.sliding = true;
+                this.value = this.slide
+            },
+            onSlideEnd() {
+                this.sliding = false
+                this.value = this.slide
+            },
+            setSlide(){
+                this.slide = this.value
           }
         },
         asyncComputed: {
@@ -74,6 +75,14 @@
                 },
             },
         },
+        filters:{
+            formatDate: function(date, lang) {
+                return moment(date).locale(lang).format('Do MMMM YYYY');
+            },
+            tempAverage: function(date, lang) {
+                return moment(date).locale(lang).format('Do MMMM YYYY');
+            }
+        }
     };
 </script>
 
