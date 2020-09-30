@@ -3,7 +3,6 @@
         <div>
             <!--{{meteoData}}
             <WeatherCard v-bind:meteo=this.meteoData></WeatherCard>-->
-
             <b-carousel
                 id="carousel-1"
                 v-model="slide"
@@ -11,7 +10,7 @@
                 controls
                 indicators
                 background="aliceblue"
-                img-width="1024"
+                img-width="1080"
                 img-height="480"
                 style="text-shadow: 1px 1px 2px #333;"
                 @sliding-start="onSlideStart"
@@ -20,7 +19,7 @@
             >
                 <b-carousel-slide v-for="(weather, index) in this.weatherDataList" v-bind:key="index" img-blank>
 
-                    <WeatherCard v-bind:weatherData=weather v-bind:weather-img="`http://openweathermap.org/img/w/${weather.weather[0].icon}.png`"></WeatherCard>
+                    <WeatherCard v-bind:weatherData=weather v-bind:city=$route.params.city v-bind:weather-img="`http://openweathermap.org/img/w/${weather.weather[0].icon}.png`"></WeatherCard>
                 </b-carousel-slide>
             </b-carousel>
             <div>
@@ -39,9 +38,6 @@
     export default {
         name: 'Weather',
         components: { WeatherCard },
-        props:{
-            city:String,
-        },
         data() {
             return {
                 forecast: null,
@@ -67,7 +63,7 @@
         asyncComputed: {
             weatherDataList: {
                 async get() {
-                    return await axios.get('http://api.openweathermap.org/data/2.5/forecast?q=cergy&appid=' +API_KEY + '&units=metric&lang=fr')
+                    return await axios.get('http://api.openweathermap.org/data/2.5/forecast?q=' + this.$route.params.city + '&appid=' +API_KEY + '&units=metric&lang=fr')
                         .then((response) => response.data.list);
                     /* return axios.get('http://api.openweathermap.org/data/2.5/weather?q=cergy&appid=f2580a158c61ea6ae4b9faad15db864b&units=metric&lang=fr')
                       .then((response) => response.data); */

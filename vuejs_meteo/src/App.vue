@@ -3,6 +3,10 @@
     <b-navbar toggleable type="dark" variant="dark">
       <b-navbar-brand href="#">NavBar</b-navbar-brand>
 
+      <b-nav-form>
+        <b-form-input size="sm" class="mr-sm-2" v-model="cityName" v-on:keyup.enter="searchWeatherCity" placeholder="Search city"></b-form-input>
+      </b-nav-form>
+
       <b-navbar-toggle target="navbar-toggle-collapse">
         <template v-slot:default="{ expanded }">
           <b-icon v-if="expanded" icon="chevron-bar-up"></b-icon>
@@ -34,7 +38,9 @@
 export default {
   name: 'App',
   data() {
-    return {}
+    return {
+      cityName:"",
+    }
   },
   computed: {
     isMenuVisible: {
@@ -49,8 +55,12 @@ export default {
   methods: {
     ChangeMenuVisibility: function () {
       this.isMenuVisible = !this.isMenuVisible;
+    },
+    searchWeatherCity() {
+      this.$store.commit('setPath', '/weather/'+this.cityName);
+      this.$router.push('/weather/'+this.cityName)
     }
-  }
+  },
 }
 </script>
 
