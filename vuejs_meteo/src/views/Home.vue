@@ -45,5 +45,7 @@ export default {
 </script>
 
 <style scoped>
-
+  .home {
+    margin: 5%;
+  }
 </style>

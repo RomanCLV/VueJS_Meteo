@@ -1,5 +1,5 @@
 <template>
-  <b-row>
+  <b-row class="meteoCard">
     <b-col sm="12">
       <b-card
           overlay
@@ -24,19 +24,19 @@
           </b-row>
         </b-card-text>
 
-        <b-card-text>
+        <b-card-text @click="changeTemperatureUnity">
           <b-row class="align-items-center">
             <b-col>
-              <span class="textTemp">{{ { temp: temp, unit: tempUnit, withUnit: true } | convertTemperature }}</span>
+              <span class="textTemp">{{ { temp: temp, unit: tempUnit } | convertTemperature }}</span>
             </b-col>
             <b-col>
               <b-row>
                 <span class="iconSmale"><font-awesome-icon :icon="iconArrowUp"/></span>
-                <span class="iconText">  {{ { temp: temp_max, unit: tempUnit, withUnit: true } | convertTemperature }}</span>
+                <span class="iconText">  {{ { temp: temp_max, unit: tempUnit } | convertTemperature }}</span>
               </b-row>
               <b-row>
                 <span class="iconSmale"><font-awesome-icon :icon="iconArrowDown"/></span>
-                <span class="iconText">  {{ { temp: temp_min, unit: tempUnit, withUnit: true } | convertTemperature }}</span>
+                <span class="iconText">  {{ { temp: temp_min, unit: tempUnit } | convertTemperature }}</span>
               </b-row>
             </b-col>
           </b-row>
@@ -104,7 +104,7 @@ export default {
   },
   props: {
     city: String,
-    imgUrl: Object
+    imgUrl: String
   },
   asyncComputed: {
     getData: async function () {
@@ -130,6 +130,21 @@ export default {
       }
     }
   },
+  methods: {
+    changeTemperatureUnity: function() {
+      switch (this.tempUnit) {
+        case "celsius":
+          this.tempUnit = "fahrenheit";
+          break;
+        case "fahrenheit":
+          this.tempUnit = "kelvin";
+          break;
+        case "kelvin":
+          this.tempUnit = "celsius";
+          break;
+      }
+    }
+  },
   filters: {
     stringUpper: function (value) {
       return value.toUpperCase();
@@ -138,7 +153,7 @@ export default {
       switch (value) {
         case "celsius":
           return "°C";
-        case "farheneit":
+        case "fahrenheit":
           return "°F";
         case "kelvin":
           return "K";
@@ -150,12 +165,12 @@ export default {
       switch (value.unit) {
         case "celsius":
           value.temp -= 273.15;
-          return (Math.round(value.temp * 10) / 10) + (value.withUnit ? "°C" : "") ;
+          return (Math.round(value.temp * 10) / 10) + "°C";
         case "fahrenheit":
           value.temp = ((value.temp - 273.15) * (9/5)) + 32;
-          return (Math.round(value.temp * 10) / 10) + (value.withUnit ? "°F" : "");
+          return (Math.round(value.temp * 10) / 10) + "°F";
         case "kelvin":
-          return value.temp + (value.withUnit ? " K" : "");
+          return (Math.round(value.temp * 10) / 10) + " K";
         default:
           return value.temp;
       }
@@ -165,6 +180,10 @@ export default {
 </script>
 
 <style scoped>
+
+.meteoCard {
+  margin: 10%;
+}
 
 .iconSmale {
   color: white;
