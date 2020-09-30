@@ -1,4 +1,4 @@
-<template>
+<!--<template>
   <div id="app">
     <md-app md-waterfall md-mode="overlap">
 
@@ -38,12 +38,20 @@
     </md-app>
   </div>
 </template>
+-->
+<template>
+  <div id="app">
+    <router-link :to="{name: 'Home'}" class="md-list-item-text">Page principale</router-link>
+    <router-link :to="{name: 'VuePresenter'}" class="md-list-item-text">Vue JS</router-link>
+    <router-view></router-view>
+  </div>
+</template>
 
 <script>
-  import Vue from 'vue';
-  import VueMaterial from 'vue-material';
-
-  Vue.use(VueMaterial);
+  // import Vue from 'vue';
+  // import VueMaterial from 'vue-material';
+  //
+  // Vue.use(VueMaterial);
 
   export default {
     name: 'App',

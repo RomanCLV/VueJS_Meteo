@@ -1,6 +1,7 @@
 <template>
   <div class="notFound">
-    <md-button class="md-accent  md-raised">Vous vous êtes perdu dans les nuages ?</md-button>
+<!--    <md-button class="md-accent  md-raised">Vous vous êtes perdu dans les nuages ?</md-button>-->
+    <p>Vous vous êtes perdu dans les nuages ?</p>
   </div>
 </template>
 
