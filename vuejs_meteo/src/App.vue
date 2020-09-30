@@ -43,6 +43,8 @@
   <div id="app">
     <router-link :to="{name: 'Home'}" class="md-list-item-text">Page principale</router-link>
     <router-link :to="{name: 'VuePresenter'}" class="md-list-item-text">Vue JS</router-link>
+    <router-link :to="{name: 'Weather'}" class="md-list-item-text">Meteo</router-link>
+
     <router-view></router-view>
   </div>
 </template>
