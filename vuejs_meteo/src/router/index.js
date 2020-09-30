@@ -11,7 +11,8 @@ export default new Router( {
     routes: [
         { path: '/',              name: 'Home',         component: Home },
         { path: '/vue-presenter', name: 'VuePresenter', component: VuePresenter },
-        { path: '/weather', name: 'Weather', component: Weather },
+        { path: '/weather/:city', name: 'Weather', component: Weather },
+        { path: '/weather/:city/*',   name:'NotFound', component: NotFound },
 
         { path: '*',              name: 'NotFound',     component: NotFound }
     ]
