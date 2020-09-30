@@ -1,14 +1,24 @@
 <template>
   <div class="home">
-    <p>Home</p>
+    <MeteoCard city="cergy"/>
   </div>
 </template>
 
 <script>
 
-export default {
-  name: "Home"
-}
+  import MeteoCard from "@/components/MeteoCard";
+
+  export default {
+    name: "Home",
+    components: {
+      MeteoCard
+    },
+    mounted() {
+      this.$store.commit('setNamePage', "Météo +");
+      this.$store.commit('setIsMenuVisible', false);
+    }
+  }
+
 </script>
 
 <style scoped>
