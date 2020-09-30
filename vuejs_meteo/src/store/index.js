@@ -6,12 +6,12 @@ export const store = new Vuex.Store({
     state: {
         namePage: "Météo +",
         isMenuVisible: false,
-        path:"/",
+        city:"",
     },
     getters: {
         namePage: state => state.namePage,
         isMenuVisible: state => state.isMenuVisible,
-        lastPath: state => state.path,
+        lastCity: state => state.city,
 
     },
     mutations: {
@@ -24,8 +24,8 @@ export const store = new Vuex.Store({
         inverseIsMenuVisible(state) {
             state.isMenuVisible = !state.isMenuVisible;
         },
-        setPath(state, newPath) {
-            state.path = newPath;
+        setCity(state, newCity) {
+            state.city = newCity;
         },
     }
 });

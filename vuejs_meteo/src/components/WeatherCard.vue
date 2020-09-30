@@ -2,7 +2,7 @@
     <b-card
             v-bind:title="weatherData.dt | formatDate(this.lang)"
             tag="article"
-            md="8"
+            md="6"
             class="mb-2"
     >
 

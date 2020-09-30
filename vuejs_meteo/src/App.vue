@@ -57,10 +57,16 @@ export default {
       this.isMenuVisible = !this.isMenuVisible;
     },
     searchWeatherCity() {
-      this.$store.commit('setPath', '/weather/'+this.cityName);
-      this.$router.push('/weather/'+this.cityName)
+      this.$store.commit('setCity', this.cityName);
+      this.$router.push('/weather/'+this.cityName);
+    },
+    getCityStore(){
+      this.cityName = this.$store.getters.lastCity;
     }
   },
+  mounted() {
+    this.getCityStore();
+  }
 }
 </script>
 

@@ -15,11 +15,11 @@
                 style="text-shadow: 1px 1px 2px #333;"
                 @sliding-start="onSlideStart"
                 @sliding-end="onSlideEnd"
-                class="height100"
             >
                 <b-carousel-slide v-for="(weather, index) in this.weatherDataList" v-bind:key="index" img-blank>
-
-                    <WeatherCard v-bind:weatherData=weather v-bind:city=$route.params.city v-bind:weather-img="`http://openweathermap.org/img/w/${weather.weather[0].icon}.png`"></WeatherCard>
+                    <template v-slot:img>
+                        <WeatherCard class="d-block class-name" v-bind:weatherData=weather v-bind:city=$route.params.city v-bind:weather-img="`http://openweathermap.org/img/w/${weather.weather[0].icon}.png`"></WeatherCard>
+                    </template>
                 </b-carousel-slide>
             </b-carousel>
             <div>
@@ -88,7 +88,8 @@
     li{
         display: block;
     }
-    .height100{
-        height:100%;
+    .class-name{
+        min-height:60vh;
+        height: 100%;
     }
 </style>
