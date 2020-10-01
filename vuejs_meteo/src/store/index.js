@@ -37,7 +37,16 @@ export const store = new Vuex.Store({
             state.city = newCity;
         },
         addCities(state, cities){
-            state.cities.push(cities);
+            if (state.cities.length<9){
+                state.cities.push(cities);
+            }
         },
+        delCities(state, cityName){
+            if (state.cities.length>6){
+                state.cities = state.cities.filter(function( obj ) {
+                    return obj.name !== cityName;
+                });
+            }
+        }
     }
 });

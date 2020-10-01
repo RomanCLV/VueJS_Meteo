@@ -1,5 +1,8 @@
 <template>
   <div class="home">
+    <b-nav-form>
+      <b-form-input size="sm" class="mr-sm-2" v-model="cityName" v-on:keyup.enter="addCity" placeholder="Search city"></b-form-input>
+    </b-nav-form>
 
     <b-row align-h="around">
       <b-col sm="4"  v-for="(city, index) in this.$store.getters.cities" v-bind:key="index">
@@ -22,6 +25,7 @@ export default {
   data() {
     return{
       cities:[],
+      cityName:"",
     }
 
   },
@@ -32,7 +36,11 @@ export default {
   methods:{
     getCities(){
       this.cities = this.$store.getters.cities;
-    }
+    },
+    addCity(){
+        this.$store.commit('addCities', {name:this.cityName, img:"default"});
+        this.getCities()
+    },
 
   },
 }

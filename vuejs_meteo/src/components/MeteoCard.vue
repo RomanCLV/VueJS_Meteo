@@ -62,7 +62,11 @@
           <img v-if="icon !== null" alt="logoWeather" class="iconWeather"
                v-bind:src="'http://openweathermap.org/img/wn/' + icon + '.png'">
         </b-card-text>
-        <b-button variant="primary" href="#" @click="searchWeatherCity">Voir les prévisions</b-button>
+        <b-card-text>
+          <b-button variant="primary" href="#" @click="searchWeatherCity">Voir les prévisions</b-button>
+          <b-button @click="delCity(city)">close</b-button>
+        </b-card-text>
+
 
       </b-card>
     </b-col>
@@ -153,6 +157,10 @@ export default {
     },
     getCityStore(){
       this.city = this.$store.getters.lastCity;
+    },
+    delCity(cityName){
+      this.$store.commit('delCities', cityName);
+      this.getCities()
     }
   },
   filters: {
