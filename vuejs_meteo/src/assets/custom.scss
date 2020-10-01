@@ -1,0 +1,45 @@
+$blue:    #007bff !default;
+$red:     #dc3545 !default;
+$yellow:  #ffc107 !default;
+$green:   #28a745 !default;
+$lightGrey:#a9a9a9 !default;
+$darkGrey:#292929 !default;
+$white:   #ffffff !default;
+$colors: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$colors: map-merge(
+  (
+          "blue":       $blue,
+          "red":        $red,
+          "yellow":     $yellow,
+          "green":      $green,
+          "light-grey": $lightGrey,
+          "gray-dark":  $darkGrey,
+          "white":      $white,
+
+  ),
+  $colors
+);
+$primary:       $blue !default;
+$grey:          $lightGrey !default;
+$success:       $green !default;
+$warning:       $yellow !default;
+$danger:        $red !default;
+$light:         $white !default;
+$dark:          $darkGrey !default;
+
+$theme-colors: () !default;
+// stylelint-disable-next-line scss/dollar-variable-default
+$theme-colors: map-merge(
+  (
+          "primary":    $primary,
+          "grey":       $grey,
+          "success":    $success,
+          "warning":    $warning,
+          "danger":     $danger,
+          "light":      $light,
+          "dark":       $dark,
+  ),
+  $theme-colors
+);
+
