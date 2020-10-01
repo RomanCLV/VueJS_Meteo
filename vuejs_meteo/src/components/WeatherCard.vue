@@ -65,6 +65,23 @@ export default {
   data() {
     return {
       lang: 'fr',
+            };
+        },
+        /* computed: {
+          weatherImgUrl: {
+            get() {
+              return `http://openweathermap.org/img/w/${this.weather.weather[0].icon}.png`;
+            },
+          },
+        }, */
+        filters:{
+            formatDate: function(date, lang) {
+                return moment(date*1000).locale(lang).format('Do MMMM YYYY HH:mm');
+            },
+            tempFormat: function(temperature) {
+                return `${Math.round(temperature*100)/100} °C`;
+            },
+        }
     };
   },
   /* computed: {

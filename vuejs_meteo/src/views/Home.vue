@@ -1,26 +1,17 @@
 <template>
   <div class="home">
+    <div class="flexCenter">
+      <b-form-group
+              class="mb-0"
+              label-for="input-search"
+              description="ajouter une nouvelle carte de ville"
+      >
+        <b-form-input size="sm" id="input-search" class="mr-sm-2" v-model="cityName" v-on:keyup.enter="addCity" placeholder="Search city"></b-form-input>
+      </b-form-group>
+    </div>
     <b-row align-h="around">
-      <b-col sm="4" >
-        <MeteoCard city="cergy" v-bind:img-url="require('../assets/cergy.jpg')" />
-      </b-col>
-      <b-col sm="4">
-        <MeteoCard city="paris" v-bind:img-url="require('../assets/paris.jpg')"/>
-      </b-col>
-      <b-col sm="4">
-        <MeteoCard city="gdansk" v-bind:img-url="require('../assets/gdansk.jpg')" />
-      </b-col>
-    </b-row>
-
-    <b-row align-h="around">
-      <b-col sm="4">
-        <MeteoCard city="new york" v-bind:img-url="require('../assets/new_york.jpg')" />
-      </b-col>
-      <b-col sm="4">
-        <MeteoCard city="sydney" v-bind:img-url="require('../assets/sydney.jpg')"/>
-      </b-col>
-      <b-col sm="4">
-        <MeteoCard city="moscou" v-bind:img-url="require('../assets/moscou.jpg')" />
+      <b-col sm="4"  v-for="(city, index) in this.$store.getters.cities" v-bind:key="index">
+        <MeteoCard v-bind:city="city.name" v-bind:img-url="require('../assets/' + city.img +  '.jpg')" />
       </b-col>
     </b-row>
 
@@ -30,16 +21,38 @@
 <script>
 
 import MeteoCard from "@/components/MeteoCard";
+import axios from "axios";
+import {API_KEY} from "@/API/OpenWeatherMap/API_KEY";
 
 export default {
   name: "Home",
   components: {
     MeteoCard
   },
+  data() {
+    return{
+      cityName:"",
+    }
+
+  },
   mounted() {
     this.$store.commit('setNamePage', "Météo +");
     this.$store.commit('setIsMenuVisible', false);
-  }
+  },
+  methods:{
+    async addCity(){
+        const weatherData = await axios
+              .get("http://api.openweathermap.org/data/2.5/weather?q=" + this.cityName + "&appid=" + API_KEY)
+              .then(data => data.data)
+              .catch(error => {
+                console.log(error);
+                return null;});
+        if (weatherData !=null && weatherData.cod != "404"){
+          this.$store.commit('addCities', {name:this.cityName, img:"default"});
+        }
+    },
+
+  },
 }
 
 </script>
@@ -47,5 +60,8 @@ export default {
 <style scoped>
   .home {
     margin: 5%;
+  }
+  .flexCenter{
+    display: flex; justify-content: center;
   }
 </style>
