@@ -1,8 +1,6 @@
 <template>
     <div>
         <div>
-            <!--{{meteoData}}
-            <WeatherCard v-bind:meteo=this.meteoData></WeatherCard>-->
             <b-carousel
                 id="carousel-1"
                 v-model="slide"
@@ -16,9 +14,15 @@
                 @sliding-start="onSlideStart"
                 @sliding-end="onSlideEnd"
             >
-                <b-carousel-slide v-for="(weather, index) in this.weatherDataList" v-bind:key="index" img-blank>
+                <b-carousel-slide v-for="(item, index) in this.weatherDataList" v-bind:key="index" img-blank>
                     <template v-slot:img>
-                        <WeatherCard class="d-block class-name" v-bind:weatherData=weather v-bind:city=$route.params.city v-bind:weather-img="`http://openweathermap.org/img/w/${weather.weather[0].icon}.png`"></WeatherCard>
+                        <WeatherCard class="d-block class-name"
+                                     v-bind:weatherData=item
+                                     v-bind:city=$route.params.city
+                                     v-bind:weather-img="`http://openweathermap.org/img/w/${item['weather'][0].icon}.png`"
+                                     v-bind:hour="(item.dt + item.tz - 7200).toString()"
+                        >
+                        </WeatherCard>
                     </template>
                 </b-carousel-slide>
             </b-carousel>
@@ -43,7 +47,7 @@
                 forecast: null,
                 value: 0,
                 slide: 0,
-                sliding: null,
+                sliding: null
             };
         },
         methods: {
@@ -63,9 +67,12 @@
             weatherDataList: {
                 async get() {
                     return await axios.get('http://api.openweathermap.org/data/2.5/forecast?q=' + this.$route.params.city + '&appid=' +API_KEY + '&units=metric&lang=fr')
-                        .then((response) => response.data.list);
-                    /* return axios.get('http://api.openweathermap.org/data/2.5/weather?q=cergy&appid=f2580a158c61ea6ae4b9faad15db864b&units=metric&lang=fr')
-                      .then((response) => response.data); */
+                        .then((response) => {
+                          for(let i = 0; i < response.data.list.length; i++) {
+                            response.data.list[i].tz = response.data.city.timezone;
+                          }
+                          return response.data.list;
+                        });
                 },
                 default() {
                     return 'Chargement';

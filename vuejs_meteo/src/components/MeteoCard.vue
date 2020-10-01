@@ -9,11 +9,11 @@
       >
         <b-card-text>
           <b-row>
-            <b-col>
+            <b-col class="containerHumidity">
               <span class="icon"><font-awesome-icon :icon="iconWind"/></span>
               <span class="iconText"> {{ wind }} m/s</span>
             </b-col>
-            <b-col>
+            <b-col class="containerHumidity">
               <span class="icon"><font-awesome-icon :icon="iconPressure"/></span>
               <span class="iconText"> {{ pressure }}</span>
             </b-col>

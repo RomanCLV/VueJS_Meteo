@@ -7,13 +7,13 @@ import Weather from "../views/Weather";
 
 Vue.use(Router);
 
-export default new Router( {
+export default new Router({
     routes: [
-        { path: '/',              name: 'Home',         component: Home },
-        { path: '/vue-presenter', name: 'VuePresenter', component: VuePresenter },
-        { path: '/weather/:city', name: 'Weather', component: Weather },
-        { path: '/weather/:city/*',   name:'NotFound', component: NotFound },
+        {path: '/', name: 'Home', component: Home},
+        {path: '/vue-presenter', name: 'VuePresenter', component: VuePresenter},
+        {path: '/weather/:city', name: 'Weather', component: Weather},
+        {path: '/weather/:city/*', name: 'NotFound', component: NotFound},
 
-        { path: '*',              name: 'NotFound',     component: NotFound }
+        {path: '*', name: 'NotFound', component: NotFound}
     ]
 });

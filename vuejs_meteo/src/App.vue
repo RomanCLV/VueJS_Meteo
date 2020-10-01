@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <b-navbar toggleable type="dark" variant="dark">
-      <b-navbar-brand href="#">
+  <div >
+    <b-navbar toggleable type="dark" variant="dark" class="bgNav">
+      <b-navbar-brand href="/">
         Météo +
       </b-navbar-brand>
 
@@ -17,10 +17,10 @@
       </b-navbar-toggle>
 
       <b-collapse id="navbar-toggle-collapse" is-nav>
-        <b-navbar-nav class="ml-auto">
-          <router-link :to="{name: 'Home'}" class="md-list-item-text">Page principale</router-link>
-          <router-link :to="{name: 'VuePresenter'}" class="md-list-item-text">Vue JS</router-link>
-          <router-link to="/weather/cergy" class="md-list-item-text">Meteo</router-link>
+        <b-navbar-nav class="ml-auto route">
+          <router-link :to="{name: 'Home'}" class="md-list-item-text"><span>Page principale</span></router-link>
+          <router-link :to="{name: 'VuePresenter'}" class="md-list-item-text"><span>Vue JS</span></router-link>
+          <router-link v-bind:to="/weather/ + cityName" class="md-list-item-text"><span>Meteo</span></router-link>
 
         </b-navbar-nav>
       </b-collapse>
@@ -55,9 +55,6 @@ export default {
     }
   },
   methods: {
-    ChangeMenuVisibility: function () {
-      this.isMenuVisible = !this.isMenuVisible;
-    },
     searchWeatherCity() {
       this.$store.commit('setCity', this.cityName);
       this.$router.push('/weather/'+this.cityName);
@@ -86,6 +83,15 @@ export default {
 .center {
   text-align: center;
   margin-top: 5%;
+}
+
+.bgNav{
+  background: #0280a2 !important;
+  color: aliceblue !important;
+}
+
+.route span{
+  color: #ddeffc;
 }
 
 </style>
