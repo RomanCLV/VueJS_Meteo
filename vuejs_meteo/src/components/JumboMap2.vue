@@ -45,8 +45,8 @@
 
 <script>
     import { LMap, LTileLayer, LGeoJson, LMarker } from "vue2-leaflet";
-  /* si probleme affichage du marqueur
-  import L from 'leaflet';
+   //region si probleme affichage du marqueur
+    import L from 'leaflet';
 
     delete L.Icon.Default.prototype._getIconUrl;
 
@@ -54,7 +54,8 @@
         iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
         iconUrl: require('leaflet/dist/images/marker-icon.png'),
         shadowUrl: require('leaflet/dist/images/marker-shadow.png')
-    });*/
+    });
+    //endregion
     export default {
         name: "JumboMap2",
         components: {
