@@ -5,11 +5,14 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
     state: {
         namePage: "Météo +",
-        isMenuVisible: false
+        isMenuVisible: false,
+        city:"",
     },
     getters: {
         namePage: state => state.namePage,
-        isMenuVisible: state => state.isMenuVisible
+        isMenuVisible: state => state.isMenuVisible,
+        lastCity: state => state.city,
+
     },
     mutations: {
         setNamePage(state, value) {
@@ -20,6 +23,9 @@ export const store = new Vuex.Store({
         },
         inverseIsMenuVisible(state) {
             state.isMenuVisible = !state.isMenuVisible;
+        },
+        setCity(state, newCity) {
+            state.city = newCity;
         },
     }
 });
