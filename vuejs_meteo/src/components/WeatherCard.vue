@@ -1,18 +1,21 @@
 <template>
-  <b-jumbotron v-bind:header="city" v-bind:lead="hour | formatDate">
+  <b-jumbotron v-bind:header="getHeader" v-bind:lead="hour | formatDate">
     <b-list-group>
       <b-list-group-item>
         <b-container class="bv-example-row">
           <b-row>
-            <b-col md="2"><img v-bind:src="weatherImg" width="50" alt=""></b-col>
-            <b-col align="left">
-              <div>
+            <b-col md="2">
+              <img v-bind:src="weatherImg" width="50" alt="">
+            </b-col>
+            <b-col align-self="center">
+              <div align="left">
                 Temps : {{ weatherData.weather[0].description }}
               </div>
             </b-col>
           </b-row>
         </b-container>
       </b-list-group-item>
+
       <b-list-group-item>
         <b-container class="bv-example-row">
           <b-row>
@@ -29,6 +32,7 @@
           </b-row>
         </b-container>
       </b-list-group-item>
+
       <b-list-group-item>
         <b-container class="bv-example-row">
           <b-row>
@@ -41,8 +45,8 @@
           </b-row>
         </b-container>
       </b-list-group-item>
+
     </b-list-group>
-    <b-button variant="primary" href="#">More Info</b-button>
   </b-jumbotron>
 </template>
 
@@ -59,8 +63,12 @@ export default {
   props: {
     weatherData: Object,
     weatherImg: String,
-    city: String,
     hour: String
+  },
+  computed: {
+    getHeader: function () {
+      return this.weatherData.city.toUpperCase() + ", " + this.weatherData.country;
+    }
   },
   filters: {
     tempFormat: function (temperature) {
