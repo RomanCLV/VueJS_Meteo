@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <b-row align-h="around">
-      <b-col sm="4">
+      <b-col sm="4" >
         <MeteoCard city="cergy" v-bind:img-url="require('../assets/cergy.jpg')" />
       </b-col>
       <b-col sm="4">

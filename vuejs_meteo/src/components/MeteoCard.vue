@@ -17,31 +17,33 @@
               <span class="icon"><font-awesome-icon :icon="iconPressure"/></span>
               <span class="iconText"> {{ pressure }}</span>
             </b-col>
-            <b-col>
-              <span class="icon"><font-awesome-icon :icon="iconHumidity"/></span>
+            <b-col class="containerHumidity">
+              <!--<span class="icon"><font-awesome-icon :icon="iconHumidity"/></span>-->
+              <span class="subContainerHumidity">
+              <span><DropIcon v-bind:humidity="humidity"/></span>
               <span class="iconText"> {{ humidity }}%</span>
+
+              </span>
             </b-col>
           </b-row>
         </b-card-text>
-
         <b-card-text @click="changeTemperatureUnity">
           <b-row class="align-items-center">
             <b-col>
-              <span class="textTemp">{{ { temp: temp, unit: tempUnit } | convertTemperature }}</span>
+              <span class="textTemp">{{ {temp: temp, unit: tempUnit} | convertTemperature }}</span>
             </b-col>
             <b-col>
               <b-row>
                 <span class="iconSmale"><font-awesome-icon :icon="iconArrowUp"/></span>
-                <span class="iconText">  {{ { temp: temp_max, unit: tempUnit } | convertTemperature }}</span>
+                <span class="iconText">  {{ {temp: temp_max, unit: tempUnit} | convertTemperature }}</span>
               </b-row>
               <b-row>
                 <span class="iconSmale"><font-awesome-icon :icon="iconArrowDown"/></span>
-                <span class="iconText">  {{ { temp: temp_min, unit: tempUnit } | convertTemperature }}</span>
+                <span class="iconText">  {{ {temp: temp_min, unit: tempUnit} | convertTemperature }}</span>
               </b-row>
             </b-col>
           </b-row>
         </b-card-text>
-
         <b-card-text>
           <b-row>
             <b-col class="textCity">
@@ -49,20 +51,26 @@
             </b-col>
           </b-row>
         </b-card-text>
-
         <b-card-text>
           <b-row>
             <b-col class="textDescription">
               {{ description }}
             </b-col>
           </b-row>
-
         </b-card-text>
         <b-card-text>
           <img v-if="icon !== null" alt="logoWeather" class="iconWeather"
                v-bind:src="'http://openweathermap.org/img/wn/' + icon + '.png'">
+        </b-card-text>
+        <b-card-text>
           <b-button variant="primary" href="#" @click="searchWeatherCity">Voir les prévisions</b-button>
-
+        </b-card-text>
+        <b-card-text class="textDescription">
+          <b-row>
+            <b-col>
+              {{ hour | moment('DD/MM/YYYY - HH:mm') }}
+            </b-col>
+          </b-row>
         </b-card-text>
       </b-card>
     </b-col>
@@ -71,18 +79,23 @@
 </template>
 
 <script>
-import Vue from 'vue'
-import AsyncComputed from 'vue-async-computed'
+import Vue from 'vue';
+import AsyncComputed from 'vue-async-computed';
+import moment from 'vue-moment';
+
 import axios from "axios";
 import {API_KEY} from "@/API/OpenWeatherMap/API_KEY";
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
 import {faWind, faTint, faTachometerAlt, faLongArrowAltUp, faLongArrowAltDown} from '@fortawesome/free-solid-svg-icons';
+import DropIcon from "@/components/DropIcon";
 
 Vue.use(AsyncComputed);
+Vue.use(moment);
 
 export default {
   name: "MeteoCard",
   components: {
+    DropIcon,
     FontAwesomeIcon
   },
   data() {
@@ -96,13 +109,14 @@ export default {
       humidity: 0,
       pressure: 0,
       description: "",
+      hour: 0,
       icon: null,
       iconWind: faWind,
       iconHumidity: faTint,
       iconPressure: faTachometerAlt,
       iconArrowUp: faLongArrowAltUp,
       iconArrowDown: faLongArrowAltDown,
-      tempUnit: "celsius",
+      tempUnit: "celsius"
     }
   },
   props: {
@@ -119,6 +133,7 @@ export default {
             console.log(error);
             return null;
           });
+      console.log(weatherData);
       if (weatherData !== null) {
         this.name = weatherData.name;
         this.country = weatherData.sys.country;
@@ -130,11 +145,12 @@ export default {
         this.pressure = weatherData.main.pressure;
         this.description = weatherData['weather'][0].main;
         this.icon = weatherData['weather'][0].icon;
+        this.hour = weatherData.dt + weatherData.timezone - 7200;
       }
     }
   },
   methods: {
-    changeTemperatureUnity: function() {
+    changeTemperatureUnity: function () {
       switch (this.tempUnit) {
         case "celsius":
           this.tempUnit = "fahrenheit";
@@ -147,11 +163,11 @@ export default {
           break;
       }
     },
-   searchWeatherCity() {
+    searchWeatherCity() {
       this.$store.commit('setCity', this.city);
-      this.$router.push('/weather/'+this.city);
+      this.$router.push('/weather/' + this.city);
     },
-    getCityStore(){
+    getCityStore() {
       this.city = this.$store.getters.lastCity;
     }
   },
@@ -177,15 +193,15 @@ export default {
           value.temp -= 273.15;
           return (Math.round(value.temp * 10) / 10) + "°C";
         case "fahrenheit":
-          value.temp = ((value.temp - 273.15) * (9/5)) + 32;
+          value.temp = ((value.temp - 273.15) * (9 / 5)) + 32;
           return (Math.round(value.temp * 10) / 10) + "°F";
         case "kelvin":
           return (Math.round(value.temp * 10) / 10) + " K";
         default:
           return value.temp;
       }
-    }
-  }
+    },
+  },
 }
 </script>
 
@@ -207,28 +223,38 @@ export default {
 
 .iconText {
   font-size: 16px;
-  text-shadow: #000000 0 0 5px;
+  text-shadow: #000000 0 0 10px;
 }
 
 .textCity {
   font-size: 25px;
-  text-shadow: #000000 0 0 5px;
+  text-shadow: #000000 0 0 10px;
 }
 
 .textDescription {
   font-size: 20px;
-  text-shadow: #000000 0 0 5px;
+  text-shadow: #000000 0 0 10px;
 }
 
 .textTemp {
   font-size: 50px;
-  text-shadow: #000000 0 0 5px;
+  text-shadow: #000000 0 0 10px;
 }
 
+
 .iconWeather {
-  width: 50%;
+  width: 35%;
   height: auto;
   object-fit: cover;
+}
+
+.containerHumidity {
+  align-self: center;
+}
+
+.subContainerHumidity {
+  display: flex;
+  justify-content: center;
 }
 
 </style>
