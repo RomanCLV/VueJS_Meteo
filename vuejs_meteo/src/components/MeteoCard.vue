@@ -59,12 +59,15 @@
 
         </b-card-text>
         <b-card-text>
-          <img v-if="icon !== null" alt="logoWeather" class="iconWeather"
+          <img v-if="icon !== null" width="70p" alt="logoWeather" class="iconWeather"
                v-bind:src="'http://openweathermap.org/img/wn/' + icon + '.png'">
         </b-card-text>
         <b-card-text>
           <b-button variant="primary" href="#" @click="searchWeatherCity">Voir les prévisions</b-button>
-          <b-button @click="delCity(city)">close</b-button>
+          <div>
+            <b-button @click="delCity(city)">close</b-button>
+            <b-button @click="updateData">update</b-button>
+          </div>
         </b-card-text>
 
 
@@ -134,10 +137,35 @@ export default {
         this.pressure = weatherData.main.pressure;
         this.description = weatherData['weather'][0].main;
         this.icon = weatherData['weather'][0].icon;
+        console.log(weatherData.dt)
+
       }
     }
   },
   methods: {
+    async updateData () {
+      const weatherData = await axios
+              .get("http://api.openweathermap.org/data/2.5/weather?q=" + this.city + "&appid=" + API_KEY)
+              .then(data => data.data)
+              .catch(error => {
+                console.log("Error :");
+                console.log(error);
+                return null;
+              });
+      if (weatherData !== null) {
+        this.name = weatherData.name;
+        this.country = weatherData.sys.country;
+        this.wind = weatherData.wind.speed;
+        this.temp = weatherData.main.temp;
+        this.temp_min = weatherData.main.temp_min;
+        this.temp_max = weatherData.main.temp_max;
+        this.humidity = weatherData.main.humidity;
+        this.pressure = weatherData.main.pressure;
+        this.description = weatherData['weather'][0].main;
+        this.icon = weatherData['weather'][0].icon;
+        console.log(weatherData.dt)
+      }
+    },
     changeTemperatureUnity: function() {
       switch (this.tempUnit) {
         case "celsius":
@@ -160,7 +188,6 @@ export default {
     },
     delCity(cityName){
       this.$store.commit('delCities', cityName);
-      this.getCities()
     }
   },
   filters: {
