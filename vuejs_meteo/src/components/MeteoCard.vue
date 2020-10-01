@@ -2,43 +2,40 @@
   <b-row class="meteoCard">
     <b-col sm="12" class="container">
       <b-card
-          class="container2"
           overlay
           :img-src="imgUrl"
           text-variant="white"
-          img-height="500"
+          img-height="550"
       >
-        <b-card-text v-if="!this.isDefault">
-          <b-row>
-            <b-col>
-              <b-icon-x-octagon @click="delCity(city)"/>
-            </b-col>
-            <b-col>
-              <b-icon-arrow-counterclockwise @click="updateData()"/>
-            </b-col>
-          </b-row>
-        </b-card-text>
-
         <b-card-text>
           <b-row>
-            <b-col class="containerHumidity">
+            <b-col class="containerInfos">
               <span class="icon"><font-awesome-icon :icon="iconWind"/></span>
               <span class="iconText"> {{ wind }} m/s</span>
             </b-col>
-            <b-col class="containerHumidity">
+            <b-col class="containerInfos">
               <span class="icon"><font-awesome-icon :icon="iconPressure"/></span>
               <span class="iconText"> {{ pressure }}</span>
             </b-col>
-            <b-col class="containerHumidity">
-              <!--<span class="icon"><font-awesome-icon :icon="iconHumidity"/></span>-->
-              <span class="subContainerHumidity">
-              <span><DropIcon v-bind:humidity="humidity"/></span>
-              <span class="iconText"> {{ humidity }}%</span>
-
+            <b-col class="containerInfos">
+              <span class="subContainerInfos">
+                <span><DropIcon v-bind:humidity="humidity"/></span>
+                <span class="iconText"> {{ humidity }}%</span>
+              </span>
+            </b-col>
+            <b-col class="containerInfos">
+              <span class="h3 mb-2">
+                <b-icon-arrow-counterclockwise @click="updateData"/>
+              </span>
+            </b-col>
+            <b-col v-if="!this.isDefault" class="containerInfos">
+              <span class="h3 mb-2">
+                <b-icon-x-octagon @click="delCity(city)"/>
               </span>
             </b-col>
           </b-row>
         </b-card-text>
+
         <b-card-text @click="changeTemperatureUnity">
           <b-row class="align-items-center">
             <b-col>
@@ -247,14 +244,17 @@ export default {
 }
 
 .container {
-  box-shadow: #000000 10px -0px 30px;
+  transition-duration: 0.5s;
+  box-shadow: #0b2541 10px 10px 40px;
   padding: 0;
-  margin: 0;
-  border-radius: 100px !important;
-  border: black  !important;
+  margin: 20px;
+  border-radius: 20px !important;
 }
 
-.container2 {
+.container:hover {
+  transition-duration: 0.5s;
+  margin: 0;
+  box-shadow: #0b2541 10px 10px 10px;
 }
 
 .iconSmale {
@@ -293,11 +293,11 @@ export default {
   object-fit: cover;
 }
 
-.containerHumidity {
+.containerInfos {
   align-self: center;
 }
 
-.subContainerHumidity {
+.subContainerInfos {
   display: flex;
   justify-content: center;
 }

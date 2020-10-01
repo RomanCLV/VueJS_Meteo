@@ -39,8 +39,10 @@
             <b-col md="2">
               <DropIcon v-bind:humidity="weatherData.main.humidity" v-bind:variant="'primary'"/>
             </b-col>
-            <b-col align="left">
-              {{ weatherData.main.humidity }}%
+            <b-col align-self="center">
+              <div align="left">
+                {{ weatherData.main.humidity }}%
+              </div>
             </b-col>
           </b-row>
         </b-container>
