@@ -10,13 +10,13 @@
       </b-form-group>
     </div>
     <b-row align-h="around">
-      <b-col sm="4" v-for="(city, index) in this.$store.getters.cities" v-bind:key="index">
-        <MeteoCard v-bind:city="city.name" v-bind:isDefault="false" v-bind:img-url="require('../assets/default.gif')" />
+      <b-col sm="5" v-for="(city, index) in this.$store.getters.cities" v-bind:key="index">
+        <MeteoCard v-bind:city="city.name" v-bind:isDefault="false" v-bind:img-url="require('../assets/pictures/background/' + city.img + '.gif')" />
       </b-col>
     </b-row>
     <b-row align-h="around">
-      <b-col sm="4"  v-for="(city, index) in this.$store.getters.defaultCities" v-bind:key="index">
-        <MeteoCard v-bind:city="city.name" v-bind:isDefault="true" v-bind:img-url="require('../assets/' + city.img + '.jpg')" />
+      <b-col sm="5"  v-for="(city, index) in this.$store.getters.defaultCities" v-bind:key="index">
+        <MeteoCard v-bind:city="city.name" v-bind:isDefault="true" v-bind:img-url="require('../assets/pictures/default/' + city.img + '.jpg')" />
       </b-col>
     </b-row>
 
@@ -35,11 +35,11 @@ export default {
     MeteoCard
   },
   data() {
-    return{
+    return {
       cityName:"",
     }
   },
-  methods:{
+  methods: {
     async addCity(){
         const weatherData = await axios
               .get("http://api.openweathermap.org/data/2.5/weather?q=" + this.cityName + "&appid=" + API_KEY)
@@ -48,11 +48,10 @@ export default {
                 console.log(error);
                 return null;
               });
-        if (weatherData !== null && weatherData.cod !== "404"){
-          this.$store.commit('addCities', { name: this.cityName, img: "default" });
+        if (weatherData !== null && weatherData.cod !== "404") {
+          this.$store.commit('addCities', { name: weatherData.name, img: "default" });
         }
-    },
-
+    }
   },
 }
 
@@ -66,3 +65,4 @@ export default {
     display: flex; justify-content: center;
   }
 </style>
+

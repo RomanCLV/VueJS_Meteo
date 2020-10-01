@@ -155,6 +155,9 @@ export default {
         this.description = weatherData['weather'][0].main;
         this.icon = weatherData['weather'][0].icon;
         this.hour = weatherData.dt + weatherData.timezone - 7200;
+        if (!this.isDefault) {
+          this.$store.commit('updateImg', { name: this.name, img: this.description });
+        }
       }
     }
   },

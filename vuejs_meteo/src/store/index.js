@@ -17,20 +17,21 @@ export const store = new Vuex.Store({
         cities: []
     },
     getters: {
-        cities: state => state.cities,
+        cities:        state => state.cities,
         defaultCities: state => state.defaultCities
     },
     mutations: {
         addCities(state, city) {
-
             const inDefault = state.defaultCities.filter(item => item.name === city.name).length > 0;
             const inCities = state.cities.filter(item => item.name === city.name).length > 0;
 
+            const max = 6;
+
             if (!inCities && !inDefault) {
-                if (state.cities.length < 3) {
+                if (state.cities.length < max) {
                     state.cities.push(city);
                 }
-                else if (state.cities.length === 3) {
+                else if (state.cities.length === max) {
                     state.cities.splice(0, 1);
                     state.cities.push(city);
                 }
@@ -41,6 +42,46 @@ export const store = new Vuex.Store({
                 state.cities = state.cities.filter(function( obj ) {
                     return obj.name !== cityName;
                 });
+            }
+        },
+        updateImg(state, value) {
+            for (let i = 0; i < state.cities.length; i++) {
+                if (state.cities[i].name.toLowerCase() === value.name.toLowerCase()) {
+                    switch (value.img) {
+                        case "Thunderstorm":
+                        case "Tornado":
+                            state.cities[i].img = "thunderstorm";
+                            break;
+                        case "Drizzle":
+                        case "Rain":
+                            state.cities[i].img = "rain";
+                            break;
+                        case "Snow":
+                            state.cities[i].img = "snow";
+                            break;
+                        case "Clear":
+                            state.cities[i].img = "clear";
+                            break;
+                        case "Clouds":
+                            state.cities[i].img = "clouds";
+                            break;
+                        case "Mist":
+                        case "Smoke":
+                        case "Haze":
+                        case "Dust":
+                        case "Fog":
+                        case "Sand":
+                        case "Ash":
+                        case "Squall":
+                            state.cities[i].img = "wind";
+                            break;
+                        default:
+                            console.log("Can't find good weather for :");
+                            console.log(value.img);
+                            break;
+                    }
+                    break;
+                }
             }
         }
     },
