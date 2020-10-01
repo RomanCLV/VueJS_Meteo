@@ -1,9 +1,14 @@
 <template>
   <div class="home">
-    <b-nav-form>
-      <b-form-input size="sm" class="mr-sm-2" v-model="cityName" v-on:keyup.enter="addCity" placeholder="Search city"></b-form-input>
-    </b-nav-form>
-
+    <div class="flexCenter">
+      <b-form-group
+              class="mb-0"
+              label-for="input-search"
+              description="ajouter une nouvelle carte de ville"
+      >
+        <b-form-input size="sm" id="input-search" class="mr-sm-2" v-model="cityName" v-on:keyup.enter="addCity" placeholder="Search city"></b-form-input>
+      </b-form-group>
+    </div>
     <b-row align-h="around">
       <b-col sm="4"  v-for="(city, index) in this.$store.getters.cities" v-bind:key="index">
         <MeteoCard v-bind:city="city.name" v-bind:img-url="require('../assets/' + city.img +  '.jpg')" />
@@ -50,5 +55,8 @@ export default {
 <style scoped>
   .home {
     margin: 5%;
+  }
+  .flexCenter{
+    display: flex; justify-content: center;
   }
 </style>
