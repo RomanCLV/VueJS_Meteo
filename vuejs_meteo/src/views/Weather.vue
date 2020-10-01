@@ -18,7 +18,6 @@
                     <template v-slot:img>
                         <WeatherCard class="d-block class-name"
                                      v-bind:weatherData=item
-                                     v-bind:city=$route.params.city
                                      v-bind:weather-img="`http://openweathermap.org/img/w/${item['weather'][0].icon}.png`"
                                      v-bind:hour="(item.dt + item.tz - 7200).toString()"
                         >
@@ -30,7 +29,6 @@
                 <b-form-input id="range-2" v-model="value" type="range" min="0" v-bind:max="this.weatherDataList.length-1" step="1" @update="setSlide" @change="setSlide"></b-form-input>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -47,7 +45,8 @@
                 forecast: null,
                 value: 0,
                 slide: 0,
-                sliding: null
+                sliding: null,
+                coord: null
             };
         },
         methods: {
@@ -70,6 +69,9 @@
                         .then((response) => {
                           for(let i = 0; i < response.data.list.length; i++) {
                             response.data.list[i].tz = response.data.city.timezone;
+                            response.data.list[i].city = response.data.city.name;
+                            response.data.list[i].country = response.data.city.country;
+                            this.coord = response.data.city.coord;
                           }
                           return response.data.list;
                         });
