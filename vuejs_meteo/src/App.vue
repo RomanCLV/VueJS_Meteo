@@ -44,7 +44,9 @@
 <template>
   <div>
     <b-navbar toggleable type="dark" variant="dark">
-      <b-navbar-brand href="#">NavBar</b-navbar-brand>
+      <b-navbar-brand href="#">
+        Météo +
+      </b-navbar-brand>
 
       <b-navbar-toggle target="navbar-toggle-collapse">
         <template v-slot:default="{ expanded }">
@@ -108,6 +110,7 @@ export default {
 
 .center {
   text-align: center;
+  margin-top: 5%;
 }
 
 </style>
