@@ -14,11 +14,13 @@ export const store = new Vuex.Store({
             {name : "sydney", img:"sydney"},
             {name : "moscou", img:"moscou"},
         ],
-        cities: []
+        cities: [],
+        location:{lat:"", lon:""},
     },
     getters: {
-        cities:        state => state.cities,
-        defaultCities: state => state.defaultCities
+        cities: state => state.cities,
+        defaultCities: state => state.defaultCities,
+        location : state => state.location,
     },
     mutations: {
         addCities(state, city) {
@@ -43,6 +45,9 @@ export const store = new Vuex.Store({
                     return obj.name !== cityName;
                 });
             }
+        },
+        updateLocation(state, coords){
+            state.location=coords;
         },
         updateImg(state, value) {
             for (let i = 0; i < state.cities.length; i++) {

@@ -14,7 +14,7 @@
                 @sliding-start="onSlideStart"
                 @sliding-end="onSlideEnd"
             >
-                <b-carousel-slide v-for="(item, index) in this.weatherDataList" v-bind:key="index" img-blank>
+                <b-carousel-slide v-for="(item, index) in this.weatherDataList.list" v-bind:key="index" img-blank>
                     <template v-slot:img>
                         <WeatherCard class="d-block class-name"
                                      v-bind:weatherData=item
@@ -26,8 +26,9 @@
                 </b-carousel-slide>
             </b-carousel>
             <div>
-                <b-form-input id="range-2" v-model="value" type="range" min="0" v-bind:max="this.weatherDataList.length-1" step="1" @update="setSlide" @change="setSlide"></b-form-input>
+                <b-form-input id="range-2" v-model="value" type="range" min="0" v-bind:max="this.weatherDataList.list.length-1" step="1" @update="setSlide" @change="setSlide"></b-form-input>
             </div>
+            <JumboMap2></JumboMap2>
         </div>
     </div>
 </template>
@@ -36,10 +37,11 @@
     import axios from 'axios';
     import WeatherCard from '../components/WeatherCard.vue';
     import { API_KEY } from "@/API/OpenWeatherMap/API_KEY";
+    import JumboMap2 from "../components/JumboMap2";
 
     export default {
         name: 'Weather',
-        components: { WeatherCard },
+        components: {JumboMap2, WeatherCard },
         data() {
             return {
                 forecast: null,
@@ -67,13 +69,14 @@
                 async get() {
                     return await axios.get('http://api.openweathermap.org/data/2.5/forecast?q=' + this.$route.params.city + '&appid=' +API_KEY + '&units=metric&lang=fr')
                         .then((response) => {
-                          for(let i = 0; i < response.data.list.length; i++) {
+                            console.log(response.data.city.coord)
+                            this.$store.commit("updateLocation", response.data.city.coord);
+                            for(let i = 0; i < response.data.list.length; i++) {
                             response.data.list[i].tz = response.data.city.timezone;
                             response.data.list[i].city = response.data.city.name;
                             response.data.list[i].country = response.data.city.country;
-                            this.coord = response.data.city.coord;
                           }
-                          return response.data.list;
+                          return response.data;
                         });
                 },
                 default() {

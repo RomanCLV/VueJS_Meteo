@@ -7,6 +7,18 @@
           text-variant="white"
           img-height="550"
       >
+        <b-card-text >
+          <b-row>
+            <b-col>
+              <b-icon-arrow-counterclockwise @click="updateData()"/>
+            </b-col>
+            <b-col>
+              <b-icon-x-octagon v-if="!this.isDefault" @click="delCity(city)"/>
+            </b-col>
+
+          </b-row>
+        </b-card-text>
+
         <b-card-text>
           <b-row>
             <b-col class="containerInfos">
