@@ -23,7 +23,7 @@
         </div>
         <l-map
                 :zoom="zoom"
-                :center="center"
+                :center="[this.$store.getters.location.lat, this.$store.getters.location.lon]"
                 style="height: 500px; width: 100%"
         >
             <l-tile-layer
@@ -36,36 +36,32 @@
                     :options="options"
                     :options-style="styleFunction"
             />
-            <l-marker :lat-lng="marker" />
         </l-map>
+
     </b-jumbotron>
 </template>
 
 <script>
-    import { latLng } from "leaflet";
-    import { LMap, LTileLayer, LMarker, LGeoJson } from "vue2-leaflet";
+    import { LMap, LTileLayer, LGeoJson } from "vue2-leaflet";
 
     export default {
-        name: "Example",
+        name: "JumboMap2",
         components: {
             LMap,
             LTileLayer,
             LGeoJson,
-            LMarker
         },
         data() {
             return {
                 loading: false,
                 show: true,
                 enableTooltip: true,
-                zoom: 6,
-                center: [48, -1.219482],
+                zoom: 10,
                 geojson: null,
                 fillColor: "#e4ce7f",
                 url: 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
                 attribution:
                     '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors',
-                marker: latLng(47.41322, -1.219482)
             };
         },
         computed: {
