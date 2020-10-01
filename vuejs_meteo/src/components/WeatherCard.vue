@@ -42,7 +42,6 @@
         </b-container>
       </b-list-group-item>
     </b-list-group>
-    <b-button variant="primary" href="#">More Info</b-button>
   </b-jumbotron>
 </template>
 
