@@ -44,7 +44,6 @@
                 value: 0,
                 slide: 0,
                 sliding: null,
-                creationDate:null,
             };
         },
         methods: {
@@ -73,14 +72,6 @@
                 },
             },
         },
-        filters:{
-            formatDate: function(date, lang) {
-                return moment(date).locale(lang).format('Do MMMM YYYY');
-            },
-            tempAverage: function(date, lang) {
-                return moment(date).locale(lang).format('Do MMMM YYYY');
-            }
-        }
     };
 </script>
 

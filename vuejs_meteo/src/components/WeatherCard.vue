@@ -1,62 +1,52 @@
 <template>
-    <b-card
-            v-bind:title="weatherData.dt | formatDate(this.lang)"
-            tag="article"
-            md="6"
-            class="mb-2"
-    >
+    <b-jumbotron v-bind:header="weatherData.dt | formatDate(this.lang)" v-bind:lead="city">
+        <b-list-group>
+            <b-list-group-item>
+                <b-container class="bv-example-row">
+                    <b-row>
+                        <b-col md="2"><img v-bind:src="weatherImg" width="50" alt=""></b-col>
+                        <b-col align="left">
+                            <div>
+                                temps : {{weatherData.weather[0].description}}
+                            </div>
+                        </b-col>
+                    </b-row>
+                </b-container>
+            </b-list-group-item>
+            <b-list-group-item>
+                <b-container class="bv-example-row">
+                    <b-row>
+                        <b-col md="2" class="h1 mb-2">
+                            <b-icon-thermometer variant="danger" size="50"></b-icon-thermometer>
+                        </b-col>
+                        <b-col align="left">
+                            <div>température moyenne : {{ (weatherData.main.temp_min + weatherData.main.temp_max)/2 | tempFormat}}</div>
+                            <div>température : {{weatherData.main.temp | tempFormat}}</div>
+                            <div>ressentie : {{weatherData.main.feels_like | tempFormat}}</div>
+                        </b-col>
+                    </b-row>
+                </b-container>
+            </b-list-group-item>
 
-        <b-card-text>
-            <div><strong>{{city}}</strong></div>
+            <b-list-group-item>
 
-            <b-list-group>
-                <b-list-group-item>
-                    <b-container class="bv-example-row">
-                        <b-row>
-                            <b-col md="2"><img v-bind:src="weatherImg" width="50" alt=""></b-col>
-                            <b-col align="left">
-                                <div>
-                                    temps : {{weatherData.weather[0].description}}
-                                </div>
-                            </b-col>
-                        </b-row>
-                    </b-container>
-                </b-list-group-item>
-                <b-list-group-item>
-                    <b-container class="bv-example-row">
-                        <b-row>
-                            <b-col md="2" class="h1 mb-2">
-                                <b-icon-thermometer variant="danger" size="50"></b-icon-thermometer>
-                            </b-col>
-                            <b-col align="left">
-                                <div>température moyenne : {{ (weatherData.main.temp_min + weatherData.main.temp_max)/2 | tempFormat}}</div>
-                                <div>température : {{weatherData.main.temp | tempFormat}}</div>
-                                <div>ressentie : {{weatherData.main.feels_like | tempFormat}}</div>
-                            </b-col>
-                        </b-row>
-                    </b-container>
-                </b-list-group-item>
+                <b-container class="bv-example-row">
+                    <b-row>
+                        <b-col md="2">
+                            <DropIcon v-bind:humidity="weatherData.main.humidity"/>
+                        </b-col>
+                        <b-col align="left">
+                            {{weatherData.main.humidity}}%
 
-                <b-list-group-item>
+                        </b-col>
+                    </b-row>
+                </b-container>
+            </b-list-group-item>
 
-                    <b-container class="bv-example-row">
-                        <b-row>
-                            <b-col md="2">
-                                <DropIcon v-bind:humidity="weatherData.main.humidity"/>
-                            </b-col>
-                            <b-col align="left">
-                                {{weatherData.main.humidity}}%
+        </b-list-group>
+        <b-button variant="primary" href="#">More Info</b-button>
+    </b-jumbotron>
 
-                            </b-col>
-                        </b-row>
-                    </b-container>
-                </b-list-group-item>
-
-            </b-list-group>
-        </b-card-text>
-
-
-    </b-card>
 </template>
 
 <script>
