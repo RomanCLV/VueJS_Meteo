@@ -1,12 +1,24 @@
 <template>
   <b-row class="meteoCard">
-    <b-col sm="12">
+    <b-col sm="12" class="container">
       <b-card
+          class="container2"
           overlay
           :img-src="imgUrl"
           text-variant="white"
           img-height="500"
       >
+        <b-card-text v-if="!this.isDefault">
+          <b-row>
+            <b-col>
+              <b-icon-x-octagon @click="delCity(city)"/>
+            </b-col>
+            <b-col>
+              <b-icon-arrow-counterclockwise @click="updateData()"/>
+            </b-col>
+          </b-row>
+        </b-card-text>
+
         <b-card-text>
           <b-row>
             <b-col class="containerHumidity">
@@ -62,6 +74,9 @@
           <img v-if="icon !== null" width="70p" alt="logoWeather" class="iconWeather"
                v-bind:src="'http://openweathermap.org/img/wn/' + icon + '.png'">
         </b-card-text>
+        <b-card-text>
+          <b-button variant="primary" href="#" @click="searchWeatherCity">Voir les prévisions</b-button>
+        </b-card-text>
         <b-card-text class="textDescription">
           <b-row>
             <b-col>
@@ -69,19 +84,8 @@
             </b-col>
           </b-row>
         </b-card-text>
-        <b-card-text>
-          <b-button variant="primary" href="#" @click="searchWeatherCity">Voir les prévisions</b-button>
-          <div>
-            <b-button @click="delCity(city)">close</b-button>
-            <b-button @click="updateData">update</b-button>
-          </div>
-        </b-card-text>
-
-
-
       </b-card>
     </b-col>
-
   </b-row>
 </template>
 
@@ -128,7 +132,8 @@ export default {
   },
   props: {
     city: String,
-    imgUrl: String
+    imgUrl: String,
+    isDefault: Boolean
   },
   asyncComputed: {
     getData: async function () {
@@ -140,7 +145,7 @@ export default {
             console.log(error);
             return null;
           });
-      console.log(weatherData);
+
       if (weatherData !== null) {
         this.name = weatherData.name;
         this.country = weatherData.sys.country;
@@ -153,21 +158,20 @@ export default {
         this.description = weatherData['weather'][0].main;
         this.icon = weatherData['weather'][0].icon;
         this.hour = weatherData.dt + weatherData.timezone - 7200;
-        console.log(weatherData.dt)
-
       }
     }
   },
   methods: {
-    async updateData () {
+    async updateData() {
       const weatherData = await axios
-              .get("http://api.openweathermap.org/data/2.5/weather?q=" + this.city + "&appid=" + API_KEY)
-              .then(data => data.data)
-              .catch(error => {
-                console.log("Error :");
-                console.log(error);
-                return null;
-              });
+          .get("http://api.openweathermap.org/data/2.5/weather?q=" + this.city + "&appid=" + API_KEY)
+          .then(data => data.data)
+          .catch(error => {
+            console.log("Error :");
+            console.log(error);
+            return null;
+          });
+
       if (weatherData !== null) {
         this.name = weatherData.name;
         this.country = weatherData.sys.country;
@@ -179,10 +183,9 @@ export default {
         this.pressure = weatherData.main.pressure;
         this.description = weatherData['weather'][0].main;
         this.icon = weatherData['weather'][0].icon;
-        console.log(weatherData.dt)
       }
     },
-    changeTemperatureUnity: function() {
+    changeTemperatureUnity: function () {
       switch (this.tempUnit) {
         case "celsius":
           this.tempUnit = "fahrenheit";
@@ -199,10 +202,7 @@ export default {
       this.$store.commit('setCity', this.city);
       this.$router.push('/weather/' + this.city);
     },
-    getCityStore() {
-      this.city = this.$store.getters.lastCity;
-    },
-    delCity(cityName){
+    delCity(cityName) {
       this.$store.commit('delCities', cityName);
     }
   },
@@ -246,6 +246,17 @@ export default {
   margin: 10%;
 }
 
+.container {
+  box-shadow: #000000 10px -0px 30px;
+  padding: 0;
+  margin: 0;
+  border-radius: 100px !important;
+  border: black  !important;
+}
+
+.container2 {
+}
+
 .iconSmale {
   color: white;
   font-size: 1em;
@@ -275,7 +286,6 @@ export default {
   font-size: 50px;
   text-shadow: #000000 0 0 10px;
 }
-
 
 .iconWeather {
   width: 35%;

@@ -64,26 +64,15 @@ export default {
   },
   data() {
     return {
-      lang: 'fr',
     }
   },
-  /* computed: {
-    weatherImgUrl: {
-      get() {
-        return `http://openweathermap.org/img/w/${this.weather.weather[0].icon}.png`;
-      },
-    },
-  }, */
   filters: {
     tempFormat: function (temperature) {
       return `${Math.round(temperature * 100) / 100} °C`;
     },
     formatDate : function (value) {
-      console.log("date:");
-      console.log(value);
       return moment(value*1000).locale('fr').format('DD/MM/YYYY - HH:mm');
     }
-
   }
 };
 </script>

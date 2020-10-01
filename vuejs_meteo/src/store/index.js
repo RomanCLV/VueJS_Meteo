@@ -4,13 +4,9 @@ import createPersistedState from "vuex-persistedstate";
 
 Vue.use(Vuex);
 
-
 export const store = new Vuex.Store({
     state: {
-        namePage: "Météo +",
-        isMenuVisible: false,
-        city:"",
-        cities:[
+        defaultCities:[
             {name : "cergy", img:"cergy"},
             {name : "paris", img:"paris"},
             {name : "gdansk", img:"gdansk"},
@@ -18,34 +14,30 @@ export const store = new Vuex.Store({
             {name : "sydney", img:"sydney"},
             {name : "moscou", img:"moscou"},
         ],
+        cities: []
     },
     getters: {
-        namePage: state => state.namePage,
-        isMenuVisible: state => state.isMenuVisible,
-        lastCity: state => state.city,
         cities: state => state.cities,
-
+        defaultCities: state => state.defaultCities
     },
     mutations: {
-        setNamePage(state, value) {
-            state.namePage = value;
-        },
-        setIsMenuVisible(state, value) {
-            state.isMenuVisible = value;
-        },
-        inverseIsMenuVisible(state) {
-            state.isMenuVisible = !state.isMenuVisible;
-        },
-        setCity(state, newCity) {
-            state.city = newCity;
-        },
-        addCities(state, cities){
-            if (state.cities.length<9){
-                state.cities.push(cities);
+        addCities(state, city) {
+
+            const inDefault = state.defaultCities.filter(item => item.name === city.name).length > 0;
+            const inCities = state.cities.filter(item => item.name === city.name).length > 0;
+
+            if (!inCities && !inDefault) {
+                if (state.cities.length < 3) {
+                    state.cities.push(city);
+                }
+                else if (state.cities.length === 3) {
+                    state.cities.splice(0, 1);
+                    state.cities.push(city);
+                }
             }
         },
-        delCities(state, cityName){
-            if (state.cities.length>6){
+        delCities(state, cityName) {
+            if (state.cities.length > 0) {
                 state.cities = state.cities.filter(function( obj ) {
                     return obj.name !== cityName;
                 });
@@ -55,5 +47,4 @@ export const store = new Vuex.Store({
     plugins: [createPersistedState({
         cities: ['cities']
     })]
-
 });
