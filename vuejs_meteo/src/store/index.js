@@ -7,11 +7,20 @@ export const store = new Vuex.Store({
         namePage: "Météo +",
         isMenuVisible: false,
         city:"",
+        cities:[
+            {name : "cergy", img:"cergy"},
+            {name : "paris", img:"paris"},
+            {name : "gdansk", img:"gdansk"},
+            {name : "new york", img:"new_york"},
+            {name : "sydney", img:"sydney"},
+            {name : "moscou", img:"moscou"},
+        ],
     },
     getters: {
         namePage: state => state.namePage,
         isMenuVisible: state => state.isMenuVisible,
         lastCity: state => state.city,
+        cities: state => state.cities,
 
     },
     mutations: {
@@ -26,6 +35,9 @@ export const store = new Vuex.Store({
         },
         setCity(state, newCity) {
             state.city = newCity;
+        },
+        addCities(state, cities){
+            state.cities.push(cities);
         },
     }
 });

@@ -1,26 +1,9 @@
 <template>
   <div class="home">
-    <b-row align-h="around">
-      <b-col sm="4">
-        <MeteoCard city="cergy" v-bind:img-url="require('../assets/cergy.jpg')" />
-      </b-col>
-      <b-col sm="4">
-        <MeteoCard city="paris" v-bind:img-url="require('../assets/paris.jpg')"/>
-      </b-col>
-      <b-col sm="4">
-        <MeteoCard city="gdansk" v-bind:img-url="require('../assets/gdansk.jpg')" />
-      </b-col>
-    </b-row>
 
     <b-row align-h="around">
-      <b-col sm="4">
-        <MeteoCard city="new york" v-bind:img-url="require('../assets/new_york.jpg')" />
-      </b-col>
-      <b-col sm="4">
-        <MeteoCard city="sydney" v-bind:img-url="require('../assets/sydney.jpg')"/>
-      </b-col>
-      <b-col sm="4">
-        <MeteoCard city="moscou" v-bind:img-url="require('../assets/moscou.jpg')" />
+      <b-col sm="4"  v-for="(city, index) in this.$store.getters.cities" v-bind:key="index">
+        <MeteoCard v-bind:city="city.name" v-bind:img-url="require('../assets/' + city.img +  '.jpg')" />
       </b-col>
     </b-row>
 
@@ -36,10 +19,22 @@ export default {
   components: {
     MeteoCard
   },
+  data() {
+    return{
+      cities:[],
+    }
+
+  },
   mounted() {
     this.$store.commit('setNamePage', "Météo +");
     this.$store.commit('setIsMenuVisible', false);
-  }
+  },
+  methods:{
+    getCities(){
+      this.cities = this.$store.getters.cities;
+    }
+
+  },
 }
 
 </script>
