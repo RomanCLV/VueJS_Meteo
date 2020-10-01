@@ -62,9 +62,6 @@
           <img v-if="icon !== null" width="70p" alt="logoWeather" class="iconWeather"
                v-bind:src="'http://openweathermap.org/img/wn/' + icon + '.png'">
         </b-card-text>
-        <b-card-text>
-          <b-button variant="primary" href="#" @click="searchWeatherCity">Voir les prévisions</b-button>
-        </b-card-text>
         <b-card-text class="textDescription">
           <b-row>
             <b-col>
@@ -72,11 +69,14 @@
             </b-col>
           </b-row>
         </b-card-text>
+        <b-card-text>
+          <b-button variant="primary" href="#" @click="searchWeatherCity">Voir les prévisions</b-button>
           <div>
             <b-button @click="delCity(city)">close</b-button>
             <b-button @click="updateData">update</b-button>
           </div>
         </b-card-text>
+
 
 
       </b-card>
@@ -159,7 +159,6 @@ export default {
     }
   },
   methods: {
-    changeTemperatureUnity: function () {
     async updateData () {
       const weatherData = await axios
               .get("http://api.openweathermap.org/data/2.5/weather?q=" + this.city + "&appid=" + API_KEY)
