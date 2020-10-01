@@ -8,14 +8,15 @@
           text-variant="white"
           img-height="500"
       >
-        <b-card-text v-if="!this.isDefault">
+        <b-card-text >
           <b-row>
-            <b-col>
-              <b-icon-x-octagon @click="delCity(city)"/>
-            </b-col>
             <b-col>
               <b-icon-arrow-counterclockwise @click="updateData()"/>
             </b-col>
+            <b-col>
+              <b-icon-x-octagon v-if="!this.isDefault" @click="delCity(city)"/>
+            </b-col>
+
           </b-row>
         </b-card-text>
 
