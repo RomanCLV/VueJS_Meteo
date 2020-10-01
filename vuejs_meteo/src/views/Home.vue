@@ -21,6 +21,8 @@
 <script>
 
 import MeteoCard from "@/components/MeteoCard";
+import axios from "axios";
+import {API_KEY} from "@/API/OpenWeatherMap/API_KEY";
 
 export default {
   name: "Home",
@@ -29,7 +31,6 @@ export default {
   },
   data() {
     return{
-      cities:[],
       cityName:"",
     }
 
@@ -39,12 +40,16 @@ export default {
     this.$store.commit('setIsMenuVisible', false);
   },
   methods:{
-    getCities(){
-      this.cities = this.$store.getters.cities;
-    },
-    addCity(){
-        this.$store.commit('addCities', {name:this.cityName, img:"default"});
-        this.getCities()
+    async addCity(){
+        const weatherData = await axios
+              .get("http://api.openweathermap.org/data/2.5/weather?q=" + this.cityName + "&appid=" + API_KEY)
+              .then(data => data.data)
+              .catch(error => {
+                console.log(error);
+                return null;});
+        if (weatherData !=null && weatherData.cod != "404"){
+          this.$store.commit('addCities', {name:this.cityName, img:"default"});
+        }
     },
 
   },
