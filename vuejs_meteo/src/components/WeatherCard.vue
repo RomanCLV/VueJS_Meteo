@@ -78,9 +78,6 @@
             formatDate: function(date, lang) {
                 return moment(date*1000).locale(lang).format('Do MMMM YYYY HH:mm');
             },
-            tempAverage: function(date, lang) {
-                return moment(date).locale(lang).format('Do MMMM YYYY ');
-            },
             tempFormat: function(temperature) {
                 return `${Math.round(temperature*100)/100} °C`;
             },

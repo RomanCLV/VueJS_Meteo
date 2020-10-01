@@ -61,9 +61,9 @@
         <b-card-text>
           <img v-if="icon !== null" alt="logoWeather" class="iconWeather"
                v-bind:src="'http://openweathermap.org/img/wn/' + icon + '.png'">
-          <b-button variant="primary" href="#" @click="searchWeatherCity">Voir les prévisions</b-button>
-
         </b-card-text>
+        <b-button variant="primary" href="#" @click="searchWeatherCity">Voir les prévisions</b-button>
+
       </b-card>
     </b-col>
 
