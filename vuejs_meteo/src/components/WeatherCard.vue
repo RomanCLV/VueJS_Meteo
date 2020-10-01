@@ -62,10 +62,6 @@ export default {
     city: String,
     hour: String
   },
-  data() {
-    return {
-    }
-  },
   filters: {
     tempFormat: function (temperature) {
       return `${Math.round(temperature * 100) / 100} °C`;
