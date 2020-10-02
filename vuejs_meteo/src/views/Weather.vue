@@ -32,7 +32,6 @@
             <b-collapse id="collapse-2">
                 <TableCustom v-bind:weatherDataList="this.weatherDataList" />
                 <b-button v-b-toggle="'collapse-2'" >Fermer</b-button>
-
             </b-collapse>
             <JumboMap2></JumboMap2>
         </div>
