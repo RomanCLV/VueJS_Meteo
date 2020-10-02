@@ -1,7 +1,7 @@
 <template>
 
     <b-jumbotron>
-        <div  class="mapContainer">
+        <div  class="mapContainer" style="color: black;">
             <span v-if="loading">Loading...</span>
             <label for="checkbox">GeoJSON Visibility </label>
             <input
