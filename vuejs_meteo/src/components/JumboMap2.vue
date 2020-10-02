@@ -1,26 +1,6 @@
 <template>
 
     <b-jumbotron>
-        <div  class="mapContainer" style="color: black;">
-            <span v-if="loading">Loading...</span>
-            <label for="checkbox">GeoJSON Visibility </label>
-            <input
-                    id="checkbox"
-                    v-model="show"
-                    type="checkbox"
-            >
-            <label for="checkboxTooltip">Enable tooltip </label>
-            <input
-                    id="checkboxTooltip"
-                    v-model="enableTooltip"
-                    type="checkbox"
-            >
-            <input
-                    v-model="fillColor"
-                    type="color"
-            >
-            <br>
-        </div>
         <l-map
                 :zoom="zoom"
                 :center="[this.$store.getters.location.lat, this.$store.getters.location.lon]"
