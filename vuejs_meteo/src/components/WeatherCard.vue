@@ -4,7 +4,7 @@
       <b-list-group-item>
         <b-container class="bv-example-row">
           <b-row>
-            <b-col md="2">
+            <b-col md="2" align-self="center">
               <img v-bind:src="weatherImg" width="50" alt="">
             </b-col>
             <b-col align-self="center">
@@ -19,15 +19,17 @@
       <b-list-group-item>
         <b-container class="bv-example-row">
           <b-row>
-            <b-col md="2" class="h1 mb-2">
+            <b-col md="2" class="h1 mb-2" align-self="center">
               <b-icon-thermometer variant="danger" size="50"></b-icon-thermometer>
             </b-col>
-            <b-col align="left">
-              <div>Température moyenne :
-                {{ (weatherData.main.temp_min + weatherData.main.temp_max) / 2 | tempFormat }}
+            <b-col align-self="center">
+              <div align="left">
+                <div>Température moyenne :
+                  {{ (weatherData.main.temp_min + weatherData.main.temp_max) / 2 | tempFormat }}
+                </div>
+                <div>Température : {{ weatherData.main.temp | tempFormat }}</div>
+                <div>Ressentie : {{ weatherData.main.feels_like | tempFormat }}</div>
               </div>
-              <div>Température : {{ weatherData.main.temp | tempFormat }}</div>
-              <div>Ressentie : {{ weatherData.main.feels_like | tempFormat }}</div>
             </b-col>
           </b-row>
         </b-container>
@@ -36,17 +38,37 @@
       <b-list-group-item>
         <b-container class="bv-example-row">
           <b-row>
-            <b-col md="2">
+            <b-col md="2" align-self="center">
               <DropIcon v-bind:humidity="weatherData.main.humidity" v-bind:variant="'primary'"/>
             </b-col>
-            <b-col align-self="center">
+            <b-col md="4" align-self="center">
               <div align="left">
                 {{ weatherData.main.humidity }}%
+              </div>
+            </b-col>
+            <b-col md="2" align-self="center">
+              <div align="left">
+                pression:
+              </div>
+              <div align="left">
+                vent:
+              </div>
+            </b-col>
+            <b-col md="4" align-self="center">
+              <div align="left">
+                <!--<span class="icon"><font-awesome-icon :icon="iconPressure"/></span>-->
+                <span class="iconText"> {{ weatherData.main.pressure }} hpa</span>
+              </div>
+              <div align="left">
+                <!--<span class="icon"><font-awesome-icon :icon="iconPressure"/></span>-->
+                <span class="iconText"> {{ weatherData.wind.speed }} m.s<i style="vertical-align: super">-1</i></span>
               </div>
             </b-col>
           </b-row>
         </b-container>
       </b-list-group-item>
+
+
 
     </b-list-group>
   </b-jumbotron>
@@ -56,12 +78,18 @@
 import Vue from 'vue';
 import moment from 'moment';
 import DropIcon from "./DropIcon";
+import { faTachometerAlt} from '@fortawesome/free-solid-svg-icons';
 
 Vue.use(moment);
 
 export default {
   name: 'WeatherCard',
   components: {DropIcon},
+  data() {
+    return {
+      iconPressure: faTachometerAlt,
+    }
+  },
   props: {
     weatherData: Object,
     weatherImg: String,

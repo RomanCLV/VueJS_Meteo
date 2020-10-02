@@ -56,7 +56,7 @@ export default {
 
   @import "src/assets/custom.scss";
 div[class="backgroundCustom"]{
-  background: $darkGrey;
+  background: $white;
 }
 .md-app {
   height: 100%;
