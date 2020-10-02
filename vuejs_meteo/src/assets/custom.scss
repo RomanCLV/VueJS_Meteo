@@ -43,3 +43,14 @@ $theme-colors: map-merge(
   $theme-colors
 );
 
+
+:root {
+  --darkgrey-color: #292929;
+  --lightgrey-color: #a9a9a9;
+  --light-color: #ffffff;
+}
+[data-theme="dark"] {
+  --darkgrey-color: #292929;
+  --lightgrey-color: #a9a9a9;
+  --light-color: #ffffff;
+}

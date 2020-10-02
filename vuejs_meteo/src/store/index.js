@@ -24,10 +24,10 @@ export const store = new Vuex.Store({
     },
     mutations: {
         addCities(state, city) {
-            const inDefault = state.defaultCities.filter(item => item.name === city.name).length > 0;
-            const inCities = state.cities.filter(item => item.name === city.name).length > 0;
+            const inDefault = state.defaultCities.filter((item) => item.name.toUpperCase() === city.name.toUpperCase()).length > 0;
+            const inCities = state.cities.filter(item => item.name.toUpperCase() === city.name.toUpperCase()).length > 0;
 
-            const max = 6;
+            const max = 3;
 
             if (!inCities && !inDefault) {
                 if (state.cities.length < max) {
