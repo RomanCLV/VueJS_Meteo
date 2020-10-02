@@ -7,7 +7,7 @@
 
       <b-nav-form>
         <b-form-input size="sm" class="mr-sm-2" v-model="cityName" v-on:keyup.enter="searchWeatherCity" placeholder="Search city"></b-form-input>
-        <b-button v-model="checked" @click="setTheme" name="check-button"/>
+        <b-button v-model="checked" @click="setTheme" name="check-button" class="check-button"/>
 
       </b-nav-form>
 
@@ -61,10 +61,14 @@ export default {
     setTheme(){
       if (this.checked) {
         document.getElementsByClassName("backgroundCustom")[0].setAttribute('data-theme', 'dark');
+        document.getElementsByClassName("check-button")[0].setAttribute('data-theme', 'dark');
+
         this.$store.commit('updateTheme', "dark");
       }
       else {
         document.getElementsByClassName("backgroundCustom")[0].setAttribute('data-theme', 'light');
+        document.getElementsByClassName("check-button")[0].setAttribute('data-theme', 'light');
+
         this.$store.commit('updateTheme', "light");
 
       }
@@ -82,6 +86,9 @@ div[class="backgroundCustom"]{
   background: var(--bg-color);
   color: var(--tx-color);
 }
+  .check-button{
+    background: var(--bg-button-color);
+  }
 .md-app {
   height: 100%;
 }
