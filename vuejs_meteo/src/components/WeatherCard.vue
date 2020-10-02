@@ -1,5 +1,5 @@
 <template>
-  <b-jumbotron v-bind:header="getHeader" v-bind:lead="hour | formatDate">
+  <b-jumbotron class="forceBlack" v-bind:header="getHeader" v-bind:lead="hour | formatDate">
     <b-list-group>
       <b-list-group-item>
         <b-container class="bv-example-row">
@@ -69,7 +69,7 @@
         <b-container class="bv-example-row">
           <b-row>
             <b-col md="2" align-self="center">
-              <span class="icon"><font-awesome-icon :icon="iconWind"/></span>
+              <span class="icon" ><font-awesome-icon :icon="iconWind"/></span>
             </b-col>
             <b-col align-self="center">
               <div align="left">
@@ -129,5 +129,8 @@ export default {
 <style scoped>
 .mb-2, .my-2, .card {
   margin: auto !important;
+}
+.forceBlack {
+  color: black;
 }
 </style>

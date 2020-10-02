@@ -2,7 +2,7 @@
   <div class="about">
     <h1>A propos du GERS</h1>
 
-      <b-list-group style="margin-top: 20px" align="left">
+      <b-list-group style="margin-top: 20px; color: #0280a2;" align="left">
         <b-list-group-item ><span class="h2">G</span>wenaël Marchetti</b-list-group-item>
         <b-list-group-item><span class="h2">E</span>merick Chalet</b-list-group-item>
         <b-list-group-item><span class="h2">R</span>oman Clavier</b-list-group-item>
