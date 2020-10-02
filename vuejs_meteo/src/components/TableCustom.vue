@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <b-table striped hover :items="this.tableData"></b-table>
+    <div style="overflow: scroll">
+        <b-table striped hover :items="this.tableData" ></b-table>
     </div>
 </template>
 
