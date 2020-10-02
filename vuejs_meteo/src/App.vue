@@ -7,6 +7,8 @@
 
       <b-nav-form>
         <b-form-input size="sm" class="mr-sm-2" v-model="cityName" v-on:keyup.enter="searchWeatherCity" placeholder="Search city"></b-form-input>
+        <b-button v-model="checked" @click="setTheme" name="check-button"/>
+
       </b-nav-form>
 
       <b-navbar-toggle target="navbar-toggle-collapse">
@@ -37,7 +39,11 @@ export default {
   data() {
     return {
       cityName: "",
+      checked:false
     }
+  },
+  mounted() {
+    this.setTheme();
   },
   methods: {
     searchWeatherCity() {
@@ -45,20 +51,15 @@ export default {
       this.cityName = "";
     },
     setTheme(){
-
-    /*  const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-
-      function switchTheme(e) {
-        if (e.target.checked) {
-          document.documentElement.setAttribute('data-theme', 'dark');
-        }
-        else {
-          document.documentElement.setAttribute('data-theme', 'light');
-        }
+      if (this.checked) {
+        console.log("dark")
+        document.getElementsByClassName("backgroundCustom")[0].setAttribute('data-theme', 'dark');
       }
-
-      toggleSwitch.addEventListener('change', switchTheme, false);
-*/
+      else {
+        console.log("light")
+        document.getElementsByClassName("backgroundCustom")[0].setAttribute('data-theme', 'light');
+      }
+      this.checked = !this.checked
     }
   }
 }
@@ -69,7 +70,8 @@ export default {
 
   @import "src/assets/custom.scss";
 div[class="backgroundCustom"]{
-  background: var(--darkgrey-color);
+  background: var(--bg-color);
+  color: var(--tx-color);
 }
 .md-app {
   height: 100%;
@@ -86,8 +88,9 @@ div[class="backgroundCustom"]{
 }
 
 .bgNav{
-  background: #0280a2 !important;
-  color: aliceblue !important;
+  background: #0280a2;
+  background: var(--nav-color) !important;
+  color: var(--tx-color) !important;
 }
 
 .route span{
