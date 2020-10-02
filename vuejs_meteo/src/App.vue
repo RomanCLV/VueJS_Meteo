@@ -20,8 +20,8 @@
 
       <b-collapse id="navbar-toggle-collapse" is-nav>
         <b-navbar-nav class="ml-auto route">
-          <router-link :to="{name: 'Home'}" class="md-list-item-text"><span>Page principale</span></router-link>
-          <router-link :to="{name: 'About'}" class="md-list-item-text"><span>About GERS</span></router-link>
+          <router-link :to="{name: 'Home'}"  class="md-list-item-text bgRouterHover"><span>Page principale</span></router-link>
+          <router-link :to="{name: 'About'}" class="md-list-item-text bgRouterHover"><span>About GERS</span></router-link>
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
@@ -91,6 +91,7 @@ div[class="backgroundCustom"]{
     width: 25px;
     height: 25px;
   }
+
 .md-app {
   height: 100%;
 }
@@ -98,6 +99,10 @@ div[class="backgroundCustom"]{
 .md-drawer {
   width: 230px;
   max-width: calc(100vw - 125px);
+}
+
+.bgRouterHover:hover {
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .center {
