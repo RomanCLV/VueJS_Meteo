@@ -1,7 +1,7 @@
 <template>
 
     <b-jumbotron>
-        <div>
+        <div  class="mapContainer">
             <span v-if="loading">Loading...</span>
             <label for="checkbox">GeoJSON Visibility</label>
             <input
@@ -120,3 +120,12 @@
         }
     };
 </script>
+
+<style lang="scss" scoped>
+    @import "../../node_modules/bootstrap/scss/bootstrap";
+    @import "src/assets/custom.scss";
+
+    div[class="mapContainer"]{
+        color: var(--tx-color);
+    }
+</style>

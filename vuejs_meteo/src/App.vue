@@ -39,7 +39,8 @@ export default {
   data() {
     return {
       cityName: "",
-      checked:false
+      checked: this.$store.getters.theme=="dark"
+
     }
   },
   mounted() {
@@ -52,12 +53,13 @@ export default {
     },
     setTheme(){
       if (this.checked) {
-        console.log("dark")
         document.getElementsByClassName("backgroundCustom")[0].setAttribute('data-theme', 'dark');
+        this.$store.commit('updateTheme', "dark");
       }
       else {
-        console.log("light")
         document.getElementsByClassName("backgroundCustom")[0].setAttribute('data-theme', 'light');
+        this.$store.commit('updateTheme', "light");
+
       }
       this.checked = !this.checked
     }
