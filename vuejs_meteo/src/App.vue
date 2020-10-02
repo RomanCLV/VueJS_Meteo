@@ -8,7 +8,6 @@
       <b-nav-form>
         <b-form-input size="sm" class="mr-sm-2" v-model="cityName" v-on:keyup.enter="searchWeatherCity" placeholder="Search city"></b-form-input>
         <b-button v-model="checked" @click="setTheme" name="check-button" class="check-button"/>
-
       </b-nav-form>
 
       <b-navbar-toggle target="navbar-toggle-collapse">
@@ -88,6 +87,9 @@ div[class="backgroundCustom"]{
 }
   .check-button{
     background: var(--bg-button-color);
+    border-radius: 50%;
+    width: 25px;
+    height: 25px;
   }
 .md-app {
   height: 100%;
