@@ -16,11 +16,13 @@ export const store = new Vuex.Store({
         ],
         cities: [],
         location:{lat:"", lon:""},
+        theme:"light",
     },
     getters: {
         cities: state => state.cities,
         defaultCities: state => state.defaultCities,
         location : state => state.location,
+        theme: state => state.theme,
     },
     mutations: {
         addCities(state, city) {
@@ -88,9 +90,12 @@ export const store = new Vuex.Store({
                     break;
                 }
             }
+        },
+        updateTheme(state, value){
+            state.theme = value;
         }
     },
     plugins: [createPersistedState({
-        cities: ['cities']
+        cities: ['cities'], theme:['theme']
     })]
 });
