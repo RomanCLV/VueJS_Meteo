@@ -44,13 +44,28 @@ $theme-colors: map-merge(
 );
 
 
+
 :root {
-  --darkgrey-color: #292929;
-  --lightgrey-color: #a9a9a9;
-  --light-color: #ffffff;
+  --bg-color: linear-gradient(#292929, #ffffff);
+  --tx-color: #efefef;
+  --nav-color: #0280a2;
+  --bg-button-color:  #ffffff;
+
+  --light-color: #000000;
 }
 [data-theme="dark"] {
-  --darkgrey-color: #292929;
-  --lightgrey-color: #a9a9a9;
+  --bg-color: linear-gradient(#292929, #ffffff);
+  --tx-color: #ffffff;
+  --nav-color: #085469;
+  --bg-button-color:  #292929;
+
   --light-color: #ffffff;
+}
+[data-theme="light"] {
+  --bg-color: #efefefe;
+  --tx-color: #292929;
+  --nav-color: #0280a2;
+  --bg-button-color:  #ffffff;
+
+  --light-color: #000000;
 }
