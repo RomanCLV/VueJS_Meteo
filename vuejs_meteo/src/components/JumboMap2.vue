@@ -3,13 +3,13 @@
     <b-jumbotron>
         <div>
             <span v-if="loading">Loading...</span>
-            <label for="checkbox">GeoJSON Visibility</label>
+            <label for="checkbox">GeoJSON Visibility </label>
             <input
                     id="checkbox"
                     v-model="show"
                     type="checkbox"
             >
-            <label for="checkboxTooltip">Enable tooltip</label>
+            <label for="checkboxTooltip">Enable tooltip </label>
             <input
                     id="checkboxTooltip"
                     v-model="enableTooltip"

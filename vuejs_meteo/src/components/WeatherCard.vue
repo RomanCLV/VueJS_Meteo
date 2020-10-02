@@ -46,29 +46,39 @@
                 {{ weatherData.main.humidity }}%
               </div>
             </b-col>
+          </b-row>
+        </b-container>
+      </b-list-group-item>
+
+        <b-list-group-item>
+          <b-container class="bv-example-row">
+            <b-row>
+              <b-col md="2" align-self="center">
+                <span class="icon"><font-awesome-icon :icon="iconPressure"/></span>
+              </b-col>
+              <b-col align-self="center">
+                <div align="left">
+                  <span class="iconText"> {{ weatherData.main.pressure }} hpa</span>
+                </div>
+              </b-col>
+            </b-row>
+          </b-container>
+        </b-list-group-item>
+
+      <b-list-group-item>
+        <b-container class="bv-example-row">
+          <b-row>
             <b-col md="2" align-self="center">
-              <div align="left">
-                pression:
-              </div>
-              <div align="left">
-                vent:
-              </div>
+              <span class="icon"><font-awesome-icon :icon="iconWind"/></span>
             </b-col>
-            <b-col md="4" align-self="center">
+            <b-col align-self="center">
               <div align="left">
-                <!--<span class="icon"><font-awesome-icon :icon="iconPressure"/></span>-->
-                <span class="iconText"> {{ weatherData.main.pressure }} hpa</span>
-              </div>
-              <div align="left">
-                <!--<span class="icon"><font-awesome-icon :icon="iconPressure"/></span>-->
                 <span class="iconText"> {{ weatherData.wind.speed }} m.s<i style="vertical-align: super">-1</i></span>
               </div>
             </b-col>
           </b-row>
         </b-container>
       </b-list-group-item>
-
-
 
     </b-list-group>
   </b-jumbotron>
@@ -78,16 +88,21 @@
 import Vue from 'vue';
 import moment from 'moment';
 import DropIcon from "./DropIcon";
-import { faTachometerAlt} from '@fortawesome/free-solid-svg-icons';
+import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
+import {faWind, faTachometerAlt} from '@fortawesome/free-solid-svg-icons';
 
 Vue.use(moment);
 
 export default {
   name: 'WeatherCard',
-  components: {DropIcon},
+  components: {
+    DropIcon,
+    FontAwesomeIcon
+  },
   data() {
     return {
       iconPressure: faTachometerAlt,
+      iconWind: faWind
     }
   },
   props: {
