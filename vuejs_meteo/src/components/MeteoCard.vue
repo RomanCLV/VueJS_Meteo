@@ -183,6 +183,9 @@ export default {
         this.pressure = weatherData.main.pressure;
         this.description = weatherData['weather'][0].main;
         this.icon = weatherData['weather'][0].icon;
+        if (!this.isDefault) {
+          this.$store.commit('updateImg', { name: this.name, img: this.description });
+        }
       }
     },
     changeTemperatureUnity: function () {
@@ -231,7 +234,7 @@ export default {
           value.temp = ((value.temp - 273.15) * (9 / 5)) + 32;
           return (Math.round(value.temp * 10) / 10) + "°F";
         case "kelvin":
-          return (Math.round(value.temp * 10) / 10) + " K";
+          return (Math.round(value.temp)) + " K";
         default:
           return value.temp;
       }

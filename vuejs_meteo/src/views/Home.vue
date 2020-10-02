@@ -10,12 +10,12 @@
       </b-form-group>
     </div>
     <b-row align-h="around">
-      <b-col sm="5" v-for="(city, index) in this.$store.getters.cities" v-bind:key="index">
+      <b-col sm="4" v-for="(city, index) in this.$store.getters.cities" v-bind:key="index">
         <MeteoCard v-bind:city="city.name" v-bind:isDefault="false" v-bind:img-url="require('../assets/pictures/background/' + city.img + '.gif')" />
       </b-col>
     </b-row>
     <b-row align-h="around">
-      <b-col sm="5"  v-for="(city, index) in this.$store.getters.defaultCities" v-bind:key="index">
+      <b-col sm="4"  v-for="(city, index) in this.$store.getters.defaultCities" v-bind:key="index">
         <MeteoCard v-bind:city="city.name" v-bind:isDefault="true" v-bind:img-url="require('../assets/pictures/default/' + city.img + '.jpg')" />
       </b-col>
     </b-row>
@@ -49,6 +49,7 @@ export default {
                 return null;
               });
         if (weatherData !== null && weatherData.cod !== "404") {
+          this.cityName = "";
           this.$store.commit('addCities', { name: weatherData.name, img: "default" });
         }
     }
