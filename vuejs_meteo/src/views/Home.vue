@@ -6,7 +6,7 @@
               label-for="input-search"
               description="Ajouter une nouvelle carte de ville"
       >
-        <b-form-input size="sm" id="input-search" class="mr-sm-2" v-model="cityName" v-on:keyup.enter="addCity" placeholder="Search city"></b-form-input>
+        <b-form-input size="sm" id="input-search" class="mr-sm-2" v-model="cityName" v-on:keyup.enter="addCity" placeholder="(ex: Tokyo)"></b-form-input>
       </b-form-group>
     </div>
     <b-row align-h="around">
