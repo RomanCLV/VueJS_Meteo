@@ -27,6 +27,13 @@
     <div class="center backgroundCustom">
       <router-view></router-view>
     </div>
+<!--    <div style="background-color: #0280A2; color: #ddeffc; bottom: 0;">-->
+<!--      <div class="footer-copyright text-center py-3">-->
+<!--        <b-container fluid>-->
+<!--          &copy; 2020 Copyright: GERS-->
+<!--        </b-container>-->
+<!--      </div>-->
+<!--    </div>-->
   </div>
 </template>
 
@@ -45,20 +52,6 @@ export default {
       this.cityName = "";
     },
     setTheme(){
-
-    /*  const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-
-      function switchTheme(e) {
-        if (e.target.checked) {
-          document.documentElement.setAttribute('data-theme', 'dark');
-        }
-        else {
-          document.documentElement.setAttribute('data-theme', 'light');
-        }
-      }
-
-      toggleSwitch.addEventListener('change', switchTheme, false);
-*/
     }
   }
 }
