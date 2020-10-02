@@ -49,6 +49,7 @@ export default {
                 return null;
               });
         if (weatherData !== null && weatherData.cod !== "404") {
+          console.log("test addcities")
           this.$store.commit('addCities', { name: weatherData.name, img: "default" });
         }
     }
