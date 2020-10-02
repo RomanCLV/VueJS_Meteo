@@ -1,5 +1,5 @@
 <template>
-  <div >
+  <div class="backgroundCustom">
     <b-navbar toggleable type="dark" variant="dark" class="bgNav">
       <b-navbar-brand href="/">
         Météo +
@@ -14,6 +14,7 @@
           <b-icon v-if="expanded" icon="chevron-bar-up"></b-icon>
           <b-icon v-else icon="chevron-bar-down"></b-icon>
         </template>
+        <b-button @click="setTheme"></b-button>
       </b-navbar-toggle>
 
       <b-collapse id="navbar-toggle-collapse" is-nav>
@@ -23,7 +24,7 @@
         </b-navbar-nav>
       </b-collapse>
     </b-navbar>
-    <div class="center">
+    <div class="center backgroundCustom">
       <router-view></router-view>
     </div>
   </div>
@@ -42,13 +43,21 @@ export default {
     searchWeatherCity() {
       this.$router.push('/weather/' + this.cityName);
       this.cityName = "";
+    },
+    setTheme(){
+
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
+  @import "../node_modules/bootstrap/scss/bootstrap";
 
+  @import "src/assets/custom.scss";
+div[class="backgroundCustom"]{
+  background: $white;
+}
 .md-app {
   height: 100%;
 }

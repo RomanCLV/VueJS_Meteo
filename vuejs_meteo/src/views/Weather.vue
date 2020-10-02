@@ -15,8 +15,8 @@
                 @sliding-end="onSlideEnd"
             >
                 <b-carousel-slide v-for="(item, index) in this.weatherDataList.list" v-bind:key="index" img-blank>
-                    <template v-slot:img>
-                        <WeatherCard class="d-block class-name"
+                    <template v-slot:img name="item.dt">
+                        <WeatherCard class="d-block class-name" name="item.dt_text"
                                      v-bind:weatherData=item
                                      v-bind:weather-img="`http://openweathermap.org/img/w/${item['weather'][0].icon}.png`"
                                      v-bind:hour="(item.dt + item.tz - 7200).toString()"
@@ -28,6 +28,12 @@
             <div>
                 <b-form-input id="range-2" v-model="value" type="range" min="0" v-bind:max="this.weatherDataList.list.length-1" step="1" @update="setSlide" @change="setSlide"></b-form-input>
             </div>
+            <b-button v-b-toggle="'collapse-2'" >voir la table</b-button>
+            <b-collapse id="collapse-2">
+                <TableCustom v-bind:weatherDataList="this.weatherDataList" />
+                <b-button v-b-toggle="'collapse-2'" >Fermer</b-button>
+
+            </b-collapse>
             <JumboMap2></JumboMap2>
         </div>
     </div>
@@ -38,17 +44,18 @@
     import WeatherCard from '../components/WeatherCard.vue';
     import { API_KEY } from "@/API/OpenWeatherMap/API_KEY";
     import JumboMap2 from "../components/JumboMap2";
+    import TableCustom from "../components/TableCustom";
 
     export default {
         name: 'Weather',
-        components: {JumboMap2, WeatherCard },
+        components: {TableCustom, JumboMap2, WeatherCard },
         data() {
             return {
                 forecast: null,
                 value: 0,
                 slide: 0,
                 sliding: null,
-                coord: null
+                coord: null,
             };
         },
         methods: {
@@ -62,7 +69,7 @@
             },
             setSlide(){
                 this.slide = this.value
-          }
+          },
         },
         asyncComputed: {
             weatherDataList: {
